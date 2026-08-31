@@ -4,10 +4,10 @@ function Sidebar() {
     return (
         <aside className="sidebar">
             <nav aria-label="주요 메뉴">
-                <ul>
+                <ul className="sidebar-list">
                     {sideNavItems.map((item)=>(
                         <li key={item.href}>
-                            <a href={item.href}>{item.label}</a>
+                            <a className="sidebar-link" href={item.href}>{item.label}</a>
                         </li>
                     ))}
                 </ul>

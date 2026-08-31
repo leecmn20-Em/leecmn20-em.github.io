@@ -66,10 +66,37 @@ main {
 .sidebar::-webkit-scrollbar {
   display: none;
 }
-.sidebar ul {
+
+.sidebar-list {
+  display: grid;
+  grid-auto-rows: minmax(44px, auto);
+  gap: 4px;
+
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 8px 12px;
+
+  color: #222;
+  text-decoration: none;
+  border-radius: 6px;
+  background-color: #e3ebe6;
+}
+
+.sidebar-link:hover {
+  background-color: #e2e6ea;
+}
+
+.sidebar-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
 }
 
 .site-content {
