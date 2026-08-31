@@ -24,9 +24,12 @@ main {
 }
 
 .site-layout {
+  --sidebar-width: 240px;
+  --topbar-height: 56px;
+
   display: grid;
-  grid-template-columns: 240px minmax(0,1fr);
-  grid-template-rows: 56px minmax(0,1fr);
+  grid-template-columns: var(--sidebar-width) minmax(0,1fr);
+  grid-template-rows: var(--topbar-height) minmax(0,1fr);
   grid-template-areas:
     "topbar topbar"
     "sidebar content";  
@@ -51,9 +54,9 @@ main {
   padding: 24px 16px;
 
   position: sticky;
-  top: 56px;
+  top: var(--topbar-height);
   align-self: start;
-  height: calc(100dvh - 56px);
+  height: calc(100dvh - var(--topbar-height));
   overflow-y: auto;
   z-index: 10;
 
