@@ -10,23 +10,23 @@ if (!existsSync(htmlTemplate)) {
   throw new Error('dist/index.html이 없습니다. Vite 빌드를 먼저 실행하세요.')
 }
 
-const pageFiles = globSync('src/pages/**/page.jsx', {
+const pageFiles = globSync('src/pages/**/page.tsx', {
   cwd: projectRoot,
   nodir: true,
 }).map((file) => file.replaceAll('\\', '/'))
 
-if (!pageFiles.includes('src/pages/page.jsx')) {
-  throw new Error('홈 페이지인 src/pages/page.jsx가 필요합니다.')
+if (!pageFiles.includes('src/pages/page.tsx')) {
+  throw new Error('홈 페이지인 src/pages/page.tsx가 필요합니다.')
 }
 
 for (const pageFile of pageFiles) {
-  if (pageFile === 'src/pages/page.jsx') {
+  if (pageFile === 'src/pages/page.tsx') {
     continue
   }
 
   const routePath = pageFile.slice(
     'src/pages/'.length,
-    -'/page.jsx'.length,
+    -'/page.tsx'.length,
   )
   const outputFile = resolve(outputRoot, routePath, 'index.html')
 
