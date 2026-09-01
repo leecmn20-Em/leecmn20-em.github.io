@@ -1,6 +1,7 @@
 import { StrictMode, type ComponentType, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import SiteLayout from './components/SiteLayout'
 
 const pageModules = import.meta.glob<{ default: ComponentType }>(
   './pages/**/page.tsx',
@@ -27,7 +28,7 @@ const root = createRoot(rootElement)
 function render(content: ReactNode) {
   root.render(
     <StrictMode>
-      {content}
+      <SiteLayout>{content}</SiteLayout>
     </StrictMode>,
   )
 }
