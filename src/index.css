@@ -28,11 +28,11 @@ main {
   --topbar-height: 56px;
 
   display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0,1fr);
-  grid-template-rows: var(--topbar-height) minmax(0,1fr);
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  grid-template-rows: var(--topbar-height) minmax(0, 1fr);
   grid-template-areas:
     "topbar topbar"
-    "sidebar content";  
+    "sidebar content";
   min-height: 100vh;
 }
 
