@@ -1,5 +1,6 @@
 export interface ProjectInfo {
   name: string;
-  description: string;
-  link: string;
+  summary: string;
+  thumbnail: string;
+  href: string;
 }

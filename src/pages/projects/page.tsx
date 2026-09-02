@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import styles from "./projects.module.css";
 import type { ProjectInfo } from "./projectTypes";
 
@@ -13,12 +12,13 @@ function ProjectsPage() {
   return (
     <main>
       <h1>Projects</h1>
-      <div className={styles.projectList}>
+      <div className={styles.projectsGrid}>
         {projects.map((project) => (
-          <div key={project.name} className={styles.projectItem}>
+          <div key={project.name} className={styles.projectCard}>
+            <img src={project.thumbnail} alt={project.name} />
             <h2>{project.name}</h2>
-            <p>{project.description}</p>
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
+            <p>{project.summary}</p>
+            <a href={project.href} target="_blank" rel="noopener noreferrer">
               View Project
             </a>
           </div>
