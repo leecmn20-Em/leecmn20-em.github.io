@@ -15,7 +15,7 @@ function NAIrelay() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub Release
+          Download NAIrelay v1.0.1
         </a>
       </div>
     </>

@@ -11,11 +11,11 @@ function theSensors() {
       </div>
       <div className={styles.projectLinks}>
         <a
-          href="https://github.com/leecmn20-Em/MyApplication"
+          href="https://github.com/leecmn20-Em/theSensors/releases/tag/1.0.0"
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub Repository
+          Download theSensors v1.0.0
         </a>
       </div>
     </>
