@@ -1,39 +1,29 @@
 import type { ComponentType } from "react";
 import styles from "./projects.module.css";
+import type { ProjectInfo } from "./projectTypes";
 
-const entryModules = import.meta.glob<ComponentType>("./entries/*.tsx", {
+const projectModules = import.meta.glob<ProjectInfo>("./*/project.ts", {
   eager: true,
   import: "default",
 });
 
-const projectComponents = Object.fromEntries(
-  Object.entries(entryModules).map(([path, component]) => {
-    const name = path
-      .split("/")
-      .pop()
-      ?.replace(/\.tsx$/, "");
-    return [name, component];
-  }),
-) as Record<string, ComponentType>;
-
-function Project({ project }: { project: string }) {
-  const ProjectComponent = projectComponents[project];
-
-  if (!ProjectComponent) {
-    return <div>프로젝트를 찾을 수 없습니다.</div>;
-  }
-
-  return (
-    <section className={styles.project}>
-      <ProjectComponent />
-    </section>
-  );
-}
+const projects: ProjectInfo[] = Object.values(projectModules);
 
 function ProjectsPage() {
   return (
     <main>
-      <Project project="NAIrelay" />
+      <h1>Projects</h1>
+      <div className={styles.projectList}>
+        {projects.map((project) => (
+          <div key={project.name} className={styles.projectItem}>
+            <h2>{project.name}</h2>
+            <p>{project.description}</p>
+            <a href={project.link} target="_blank" rel="noopener noreferrer">
+              View Project
+            </a>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
