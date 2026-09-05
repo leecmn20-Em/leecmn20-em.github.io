@@ -3,7 +3,7 @@ import type { ProjectInfo } from "./projectTypes";
 
 const projectModules = import.meta.glob<ProjectInfo>("./*/project.ts", {
   eager: true,
-  import: "default",
+  import: "projectInfo",
 });
 
 const projects: ProjectInfo[] = Object.values(projectModules);
