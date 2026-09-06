@@ -15,8 +15,6 @@ function Project({ name }: { name: string }) {
   }
   return (
     <div className={styles.projectCard}>
-      <h2>{project.name}</h2>
-      <p>{project.summary}</p>
       <a href={project.href} target="_blank" rel="noopener noreferrer">
         <img src={project.thumbnail} alt={`${project.name} thumbnail`} />
       </a>
@@ -26,14 +24,14 @@ function Project({ name }: { name: string }) {
 
 function ProjectsPage() {
   return (
-    <main>
+    <div className={styles.project}>
       <h1>Projects</h1>
-      <div className={styles.projectsGrid}>
+      <div className={styles.projectGrid}>
         {projects.map((project) => (
           <Project key={project.name} name={project.name} />
         ))}
       </div>
-    </main>
+    </div>
   );
 }
 
