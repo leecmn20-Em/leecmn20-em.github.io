@@ -1,0 +1,43 @@
+.projectPage {
+  padding: 2rem;
+}
+
+.projectPage > * + * {
+  border-top: 1px solid #ddd;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.projectPage > * > :first-child {
+  margin-top: 0;
+}
+
+.projectPage > * > :last-child {
+  margin-bottom: 0;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+}
+
+.projectSummary {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.projectDescription {
+  font-size: 1rem;
+  color: #666;
+}
+
+.projectLink {
+  display: flex;
+  gap: 1rem;
+}
+
+.projectLink a {
+  text-decoration: none;
+  color: #0070f3;
+  transition: color 0.3s ease;
+}

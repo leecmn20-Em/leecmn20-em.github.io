@@ -1,40 +1,37 @@
-import type { ComponentType } from "react";
 import styles from "./projects.module.css";
+import type { ProjectInfo } from "./projectTypes";
 
-const entryModules = import.meta.glob<ComponentType>("./entries/*.tsx", {
+const projectModules = import.meta.glob<ProjectInfo>("./*/project.ts", {
   eager: true,
-  import: "default",
+  import: "projectInfo",
 });
 
-const projectComponents = Object.fromEntries(
-  Object.entries(entryModules).map(([path, component]) => {
-    const name = path
-      .split("/")
-      .pop()
-      ?.replace(/\.tsx$/, "");
-    return [name, component];
-  }),
-) as Record<string, ComponentType>;
+const projects: ProjectInfo[] = Object.values(projectModules);
 
-function Project({ project }: { project: string }) {
-  const ProjectComponent = projectComponents[project];
-
-  if (!ProjectComponent) {
-    return <div>프로젝트를 찾을 수 없습니다.</div>;
+function Project({ name }: { name: string }) {
+  const project = projects.find((p) => p.name === name);
+  if (!project) {
+    return null;
   }
-
   return (
-    <section className={styles.project}>
-      <ProjectComponent />
-    </section>
+    <div className={styles.projectCard}>
+      <a href={project.href} target="_blank" rel="noopener noreferrer">
+        <img src={project.thumbnail} alt={`${project.name} thumbnail`} />
+      </a>
+    </div>
   );
 }
 
 function ProjectsPage() {
   return (
-    <main>
-      <Project project="NAIrelay" />
-    </main>
+    <div className={styles.project}>
+      <h1>Projects</h1>
+      <div className={styles.projectGrid}>
+        {projects.map((project) => (
+          <Project key={project.name} name={project.name} />
+        ))}
+      </div>
+    </div>
   );
 }
 
