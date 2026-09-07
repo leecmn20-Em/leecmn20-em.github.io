@@ -1,5 +1,6 @@
 export const sideNavItems = [
-  { label: "홈", href: "/" },
-  { label: "소개", href: "/about/" },
-  { label: "프로젝트", href: "/projects/" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about/" },
+  { label: "Projects", href: "/projects/" },
+  { label: "Articles", href: "/articles/" },
 ];

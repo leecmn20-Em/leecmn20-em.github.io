@@ -2,6 +2,7 @@ import { StrictMode, type ComponentType, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import SiteLayout from "./components/SiteLayout";
+import NotFoundPage from "./pages/not-found";
 
 const pageModules = import.meta.glob<{ default: ComponentType }>(
   "./pages/**/page.tsx",
@@ -45,9 +46,6 @@ if (loadPage) {
       ),
     );
 } else {
-  render(
-    <main>
-      <h1>페이지를 찾을 수 없습니다.</h1>
-    </main>,
-  );
+  document.title = "페이지를 찾을 수 없습니다 | E.m's blog";
+  render(<NotFoundPage />);
 }

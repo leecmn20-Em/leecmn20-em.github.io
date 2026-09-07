@@ -16,7 +16,11 @@ function Project({ name }: { name: string }) {
   return (
     <div className={styles.projectCard}>
       <a href={project.href} target="_blank" rel="noopener noreferrer">
-        <img src={project.thumbnail} alt={`${project.name} thumbnail`} />
+        {project.thumbnail ? (
+          <img src={project.thumbnail} alt={`${project.name} thumbnail`} />
+        ) : (
+          <div className={styles.textThumbnail}>{project.name}</div>
+        )}
       </a>
     </div>
   );
@@ -27,9 +31,9 @@ function ProjectsPage() {
     <div className={styles.project}>
       <h1>Projects</h1>
       <div className={styles.projectGrid}>
-        {projects.map((project) => (
-          <Project key={project.name} name={project.name} />
-        ))}
+        <Project name="NAIrelay" />
+        <Project name="theSensors" />
+        <Project name="Open projects sources" />
       </div>
     </div>
   );

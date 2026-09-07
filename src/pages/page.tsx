@@ -1,3 +1,5 @@
+import WIP from "@/pages/WIP";
+
 function HomePage() {
   return (
     <main>
@@ -7,4 +9,5 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+//export default HomePage;
+export default WIP;
