@@ -35,3 +35,6 @@ for (const pageFile of pageFiles) {
 
   console.log(`Generated /${routePath}/`)
 }
+
+copyFileSync(htmlTemplate, resolve(outputRoot, '404.html'))
+console.log('Generated /404.html')
