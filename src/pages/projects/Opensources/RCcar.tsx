@@ -20,11 +20,11 @@ function RepositoryLink() {
   return (
     <div className={styles.projectLink}>
       <a
-        href="https://github.com/leecmn20-Em/RCcar"
+        href="https://github.com/leecmn20-Em/RCcar/tree/main/ino"
         target="_blank"
         rel="noopener noreferrer"
       >
-        GitHub Repository
+        코드 보기 (GitHub Repository)
       </a>
     </div>
   );

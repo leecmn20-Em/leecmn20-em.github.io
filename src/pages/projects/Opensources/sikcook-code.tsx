@@ -24,7 +24,7 @@ function RepositoryLink() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        GitHub Repository
+        코드 보기 (GitHub Repository)
       </a>
     </div>
   );
