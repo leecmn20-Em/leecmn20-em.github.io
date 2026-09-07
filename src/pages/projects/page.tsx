@@ -15,7 +15,7 @@ function Project({ name }: { name: string }) {
   }
   return (
     <div className={styles.projectCard}>
-      <a href={project.href} target="_blank" rel="noopener noreferrer">
+      <a href={project.href} rel="noopener noreferrer">
         {project.thumbnail ? (
           <img src={project.thumbnail} alt={`${project.name} thumbnail`} />
         ) : (
