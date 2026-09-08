@@ -1,12 +1,17 @@
 import styles from "./projects.module.css";
 import type { ProjectInfo } from "./projectTypes";
 
-const projectModules = import.meta.glob<ProjectInfo>("./*/project.ts", {
+const projectModules = import.meta.glob<ProjectInfo>("./**/project.ts", {
   eager: true,
   import: "projectInfo",
 });
 
-const projects: ProjectInfo[] = Object.values(projectModules);
+const projects = Object.entries(projectModules).map(([modulePath, project]) => ({
+  ...project,
+  href: `/projects/${modulePath
+    .replace(/^\.\//, "")
+    .replace(/\/project\.ts$/, "")}/`,
+}));
 
 function Project({ name }: { name: string }) {
   const project = projects.find((p) => p.name === name);
