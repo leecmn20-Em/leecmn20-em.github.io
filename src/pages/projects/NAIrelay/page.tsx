@@ -1,4 +1,7 @@
 import styles from "../projectDetail.module.css";
+import Markdown from "react-markdown";
+import description from "./description.md?raw";
+import release from "./NAIrelay-1.1.1.zip?url";
 
 function Title() {
   return (
@@ -19,7 +22,7 @@ function Summary() {
 function Description() {
   return (
     <div className={styles.projectDescription}>
-      <p>NAIrelay 프로젝트 상세 내용</p>
+      <Markdown>{description}</Markdown>
     </div>
   );
 }
@@ -27,13 +30,13 @@ function Description() {
 function RepositoryLink() {
   return (
     <div className={styles.projectLink}>
-      <a
-        href="https://github.com/leecmn20-Em/NAIrelay"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub Repository
-      </a>
+      <p>
+        다운로드:
+        <a href={release} rel="noopener noreferrer">
+          {" "}
+          NAIrelay v1.1.1 Release
+        </a>
+      </p>
     </div>
   );
 }
@@ -43,8 +46,8 @@ function NAIrelayPage() {
     <div className={styles.projectPage}>
       <Title />
       <Summary />
-      <Description />
       <RepositoryLink />
+      <Description />
     </div>
   );
 }

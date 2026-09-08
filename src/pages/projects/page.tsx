@@ -6,12 +6,14 @@ const projectModules = import.meta.glob<ProjectInfo>("./**/project.ts", {
   import: "projectInfo",
 });
 
-const projects = Object.entries(projectModules).map(([modulePath, project]) => ({
-  ...project,
-  href: `/projects/${modulePath
-    .replace(/^\.\//, "")
-    .replace(/\/project\.ts$/, "")}/`,
-}));
+const projects = Object.entries(projectModules).map(
+  ([modulePath, project]) => ({
+    ...project,
+    href: `/projects/${modulePath
+      .replace(/^\.\//, "")
+      .replace(/\/project\.ts$/, "")}/`,
+  }),
+);
 
 function Project({ name }: { name: string }) {
   const project = projects.find((p) => p.name === name);
@@ -27,6 +29,7 @@ function Project({ name }: { name: string }) {
           <div className={styles.textThumbnail}>{project.name}</div>
         )}
       </a>
+      <p>{project.summary}</p>
     </div>
   );
 }

@@ -3,6 +3,6 @@ import thumbnail from "./thumbnail.png";
 
 export const projectInfo: ProjectInfo = {
   name: "theSensors",
-  summary: "theSensors 프로젝트 내용",
+  summary: "theSensors: 안드로이드 센서 GUI",
   thumbnail,
 };

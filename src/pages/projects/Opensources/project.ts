@@ -3,6 +3,6 @@ import thumbnail from "./thumbnail.png";
 
 export const projectInfo: ProjectInfo = {
   name: "Open projects sources",
-  summary: "공개 코드 내용",
+  summary: "코드 배포",
   thumbnail,
 };
