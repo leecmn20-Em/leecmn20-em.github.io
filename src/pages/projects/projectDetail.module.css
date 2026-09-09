@@ -23,7 +23,6 @@
 
 .projectSummary {
   font-size: 1rem;
-  font-weight: bold;
 }
 
 .projectDescription {
@@ -51,7 +50,8 @@
 
 .projectLink {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0;
 }
 
 .projectLink a {

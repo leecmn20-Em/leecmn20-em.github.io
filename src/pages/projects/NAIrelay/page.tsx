@@ -43,6 +43,7 @@ function RepositoryLink() {
           NAIrelay v1.1.1 Release
         </a>
       </p>
+      <p>현재 빌드된 앱이 아닌 실행 가능한 소스 코드임을 양해해주세요.</p>
     </div>
   );
 }

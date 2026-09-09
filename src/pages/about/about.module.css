@@ -1,0 +1,13 @@
+.about > section > :first-child {
+  margin-top: 0;
+}
+
+.about > section > :last-child {
+  margin-bottom: 0;
+}
+
+.about > section + section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid grey;
+}
