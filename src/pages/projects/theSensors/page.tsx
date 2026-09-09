@@ -1,7 +1,6 @@
 import styles from "../projectDetail.module.css";
 import Markdown from "react-markdown";
 import description from "./description.md?raw";
-import release from "./theSensors.apk?url";
 
 function Title() {
   return (
@@ -14,7 +13,10 @@ function Title() {
 function Summary() {
   return (
     <div className={styles.projectSummary}>
-      <p>theSensors 프로젝트 내용</p>
+      <p>
+        사용자의 휴대폰에 설치된 센서들의 작동을 확인해보고, 센서 값을 .csv
+        파일로 로깅할 수 있도록 돕습니다.
+      </p>
     </div>
   );
 }
@@ -32,7 +34,10 @@ function RepositoryLink() {
     <div className={styles.projectLink}>
       <p>
         다운로드:
-        <a href={release} rel="noopener noreferrer">
+        <a
+          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/theSensors-1.0.0/theSensors.apk"
+          rel="noopener noreferrer"
+        >
           {" "}
           theSensors APK 설치 파일
         </a>

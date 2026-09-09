@@ -7,12 +7,14 @@ const articleModules = import.meta.glob<ArticleInfo>("./**/article.ts", {
   import: "articleInfo",
 });
 
-const articles = Object.entries(articleModules).map(([modulePath, article]) => ({
-  ...article,
-  href: `/articles/${modulePath
-    .replace(/^\.\//, "")
-    .replace(/\/article\.ts$/, "")}/`,
-}));
+const articles = Object.entries(articleModules).map(
+  ([modulePath, article]) => ({
+    ...article,
+    href: `/articles/${modulePath
+      .replace(/^\.\//, "")
+      .replace(/\/article\.ts$/, "")}/`,
+  }),
+);
 
 function Article({ name }: { name: string }) {
   const article = articles.find((p) => p.name === name);
@@ -42,5 +44,5 @@ function ArticlesPage() {
   );
 }
 
-export default ArticlesPage;
-//export default WIP;
+//export default ArticlesPage;
+export default WIP;

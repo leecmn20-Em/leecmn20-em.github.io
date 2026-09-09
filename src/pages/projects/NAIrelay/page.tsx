@@ -1,7 +1,6 @@
 import styles from "../projectDetail.module.css";
 import Markdown from "react-markdown";
 import description from "./description.md?raw";
-import release from "./NAIrelay-1.1.1.zip?url";
 
 function Title() {
   return (
@@ -14,7 +13,11 @@ function Title() {
 function Summary() {
   return (
     <div className={styles.projectSummary}>
-      <p>NAIrelay 프로젝트 내용</p>
+      <p>
+        정해진 양식의 url이 NovelAI API를 호출하도록 연결하는 로컬 서버를
+        실행하여, html 이미지 url 랜더링({"<img>"})이 즉석 생성 이미지로 나타날
+        수 있도록 도와줍니다.
+      </p>
     </div>
   );
 }
@@ -32,7 +35,10 @@ function RepositoryLink() {
     <div className={styles.projectLink}>
       <p>
         다운로드:
-        <a href={release} rel="noopener noreferrer">
+        <a
+          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-1.1.1/NAIrelay-1.1.1.zip"
+          rel="noopener noreferrer"
+        >
           {" "}
           NAIrelay v1.1.1 Release
         </a>
