@@ -50,6 +50,14 @@ main {
   background-color: var(--topbar-bg);
 }
 
+.topbar-ICON {
+  border: 1px solid yellowgreen;
+  border-radius: 1rem;
+  padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+  color: darkgreen;
+  background-color: skyblue;
+}
+
 .menu-button,
 .sidebar-backdrop {
   display: none;

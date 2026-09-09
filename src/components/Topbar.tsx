@@ -17,9 +17,14 @@ type TopbarProps = {
   onMenuClick: () => void;
 };
 
+function ICON() {
+  return <div className="topbar-ICON">E.m's Blog</div>;
+}
+
 function Topbar({ sidebarOpen, onMenuClick }: TopbarProps) {
   return (
     <header className="topbar">
+      <ICON />
       <button
         type="button"
         className="menu-button"
