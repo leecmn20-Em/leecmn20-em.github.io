@@ -3,7 +3,7 @@ import styles from "../projectDetail.module.css";
 function Title() {
   return (
     <div className={styles.projectHeader}>
-      <h1>Arduino PWM 제어 예제 1</h1>
+      <h1>Arduino 모터 PWM 제어 {"(1)"}</h1>
     </div>
   );
 }
