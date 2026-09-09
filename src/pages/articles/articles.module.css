@@ -1,11 +1,30 @@
 .article {
-  background-color: aliceblue;
 }
 
 .articleLink {
-  background-color: aliceblue;
+}
+
+.articleLink a {
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  color: blue;
 }
 
 .articleGrid {
-  background-color: aliceblue;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.articleGrid details {
+  min-height: 4rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid black;
+}
+
+.articleGrid details > summary {
+  padding: 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
 }

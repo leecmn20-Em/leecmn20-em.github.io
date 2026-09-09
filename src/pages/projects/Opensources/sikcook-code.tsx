@@ -3,7 +3,7 @@ import styles from "../projectDetail.module.css";
 function Title() {
   return (
     <div className={styles.projectHeader}>
-      <h1>Arduino PWM 제어 예제</h1>
+      <h1>Arduino PWM 제어 예제 1</h1>
     </div>
   );
 }
@@ -11,7 +11,11 @@ function Title() {
 function Description() {
   return (
     <div className={styles.projectDescription}>
-      <p>Arduino PWM 제어 예제 상세 내용</p>
+      <p>Arduino UNO R3 PWM PID 제어</p>
+      <p>
+        (시뮬레이션이 아니므로 코드는 실행이 불가능하며, 내용만 참고하시기
+        바랍니다.)
+      </p>
     </div>
   );
 }

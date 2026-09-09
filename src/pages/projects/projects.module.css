@@ -7,8 +7,9 @@
 
 .projectGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(0, 700px);
+  justify-content: center;
+  gap: 26px;
 }
 
 .projectCard {
@@ -22,13 +23,23 @@
   display: block;
   color: inherit;
   text-decoration: none;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.projectCard a:hover {
+  border-color: purple;
 }
 
 .projectCard img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 8px;
+}
+
+.projectCard p {
+  text-align: center;
 }
 
 .textThumbnail {

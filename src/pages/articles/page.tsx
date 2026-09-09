@@ -2,12 +2,19 @@ import styles from "./articles.module.css";
 import type { ArticleInfo } from "./articleTypes";
 import WIP from "@/pages/WIP";
 
-const articleModules = import.meta.glob<ArticleInfo>("./*/article.ts", {
+const articleModules = import.meta.glob<ArticleInfo>("./**/article.ts", {
   eager: true,
   import: "articleInfo",
 });
 
-const articles: ArticleInfo[] = Object.values(articleModules);
+const articles = Object.entries(articleModules).map(
+  ([modulePath, article]) => ({
+    ...article,
+    href: `/articles/${modulePath
+      .replace(/^\.\//, "")
+      .replace(/\/article\.ts$/, "")}/`,
+  }),
+);
 
 function Article({ name }: { name: string }) {
   const article = articles.find((p) => p.name === name);
@@ -28,7 +35,10 @@ function ArticlesPage() {
     <div className={styles.article}>
       <h1>Articles</h1>
       <div className={styles.articleGrid}>
-        <Article name="PID" />
+        <details>
+          <summary>제어 이야기</summary>
+          <Article name="PID" />
+        </details>
       </div>
     </div>
   );
