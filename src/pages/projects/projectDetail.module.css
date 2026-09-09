@@ -31,6 +31,24 @@
   color: black;
 }
 
+.projectDescription code {
+  padding: 0.15em 0.4em;
+  margin-inline: 0.08em;
+
+  background-color: lightgrey;
+  color: black;
+
+  border: 1px solid black;
+  border-radius: 0.35rem;
+
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.875em;
+  line-height: 1.4;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .projectLink {
   display: flex;
   gap: 1rem;
