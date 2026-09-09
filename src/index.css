@@ -40,6 +40,7 @@ main {
   grid-area: topbar;
   display: flex;
   align-items: center;
+  gap: 12px;
   padding: 0 24px;
 
   position: sticky;
@@ -47,6 +48,31 @@ main {
   z-index: 20;
 
   background-color: var(--topbar-bg);
+}
+
+.menu-button,
+.sidebar-backdrop {
+  display: none;
+}
+
+.menu-button {
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  color: #222;
+  font-size: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--divider-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 .sidebar {
@@ -106,4 +132,82 @@ main {
   grid-area: content;
   min-width: 0;
   background-color: var(--content-bg);
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 32px 16px;
+  }
+
+  .site-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "topbar"
+      "content";
+  }
+
+  .topbar {
+    padding-inline: 16px;
+    z-index: 40;
+  }
+
+  .menu-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: var(--topbar-height);
+    bottom: 0;
+    left: 0;
+
+    width: min(80vw, 280px);
+    height: auto;
+
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition:
+      transform 180ms ease,
+      visibility 180ms ease;
+
+    z-index: 30;
+    box-shadow: 8px 0 24px rgb(0 0 0 / 15%);
+  }
+
+  .sidebar[data-open="true"] {
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: var(--topbar-height) 0 0;
+    display: block;
+    padding: 0;
+
+    visibility: hidden;
+    opacity: 0;
+    background: rgb(0 0 0 / 35%);
+    border: 0;
+    pointer-events: none;
+    transition:
+      opacity 180ms ease,
+      visibility 180ms ease;
+
+    z-index: 20;
+  }
+
+  .sidebar-backdrop[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop {
+    transition: none;
+  }
 }

@@ -1,8 +1,12 @@
 import { sideNavItems } from "../sidenav";
 
-function Sidebar() {
+type SidebarProps = {
+  open: boolean;
+};
+
+function Sidebar({ open }: SidebarProps) {
   return (
-    <aside className="sidebar">
+    <aside id="site-sidebar" className="sidebar" data-open={open}>
       <nav aria-label="주요 메뉴">
         <ul className="sidebar-list">
           {sideNavItems.map((item) => (
