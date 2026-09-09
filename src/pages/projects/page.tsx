@@ -41,6 +41,7 @@ function ProjectsPage() {
       <div className={styles.projectGrid}>
         <Project name="theSensors" />
         <Project name="NAIrelay" />
+        <Project name="Bachelor" />
         <Project name="Open projects sources" />
       </div>
     </div>
