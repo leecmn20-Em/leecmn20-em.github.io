@@ -2,7 +2,7 @@ import type { ProjectInfo } from "@/pages/projects/projectTypes";
 import thumbnail from "./thumbnail.png";
 
 export const projectInfo: ProjectInfo = {
-  name: "Open projects sources",
-  summary: "코드 배포: Arduino 모터 제어",
+  name: "Bachelor",
+  summary: "코드 배포: 데이터 가공 ~ 기계학습 (학사논문연구)",
   thumbnail,
 };

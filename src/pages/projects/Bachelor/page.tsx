@@ -5,7 +5,7 @@ import description from "./description.md?raw";
 function Title() {
   return (
     <div className={styles.projectHeader}>
-      <h1>theSensors</h1>
+      <h1>NAIrelay</h1>
     </div>
   );
 }
@@ -14,10 +14,10 @@ function Summary() {
   return (
     <div className={styles.projectSummary}>
       <p>
-        사용자의 휴대폰에 설치된 센서들의 작동을 확인해보고, 센서 값을 .csv
-        파일로 로깅할 수 있도록 돕습니다.
+        정해진 양식의 url이 NovelAI API를 호출하도록 연결하는 로컬 서버를
+        실행하여, html 이미지 url 랜더링({"<img>"})이 즉석 생성 이미지로 나타날
+        수 있도록 도와줍니다.
       </p>
-      <p>이 앱을 통해 휴대폰을 임시로 부착형 센서로 활용할 수 있습니다.</p>
     </div>
   );
 }
@@ -36,18 +36,19 @@ function RepositoryLink() {
       <p>
         다운로드:
         <a
-          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/theSensors-1.0.0/theSensors.apk"
+          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-1.1.1/NAIrelay-1.1.1.zip"
           rel="noopener noreferrer"
         >
           {" "}
-          theSensors APK 설치 파일
+          NAIrelay v1.1.1 Release
         </a>
       </p>
+      <p>현재 빌드된 앱이 아닌 실행 가능한 소스 코드임을 양해해주세요.</p>
     </div>
   );
 }
 
-function TheSensorsPage() {
+function NAIrelayPage() {
   return (
     <div className={styles.projectPage}>
       <Title />
@@ -58,4 +59,4 @@ function TheSensorsPage() {
   );
 }
 
-export default TheSensorsPage;
+export default NAIrelayPage;
