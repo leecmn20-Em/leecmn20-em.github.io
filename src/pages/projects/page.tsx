@@ -39,8 +39,9 @@ function ProjectsPage() {
     <div className={styles.project}>
       <h1>Projects</h1>
       <div className={styles.projectGrid}>
-        <Project name="NAIrelay" />
         <Project name="theSensors" />
+        <Project name="NAIrelay" />
+        <Project name="Bachelor" />
         <Project name="Open projects sources" />
       </div>
     </div>
