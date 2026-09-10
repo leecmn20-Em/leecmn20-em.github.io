@@ -1,27 +1,41 @@
-.notice {
-  margin-block: 1rem;
-  padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
+.cardinfo {
+  max-width: 800px;
+  border: 0.5px solid black;
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
-.notice {
-  border-left: 4px solid;
+.cardinfo > img {
+  width: 180px;
+  max-width: 40%;
+  height: auto;
+  flex-shrink: 0;
 }
 
-.notice[data-variant="info"] {
-  color: #1e3a8a;
-  background-color: #eff6ff;
-  border-color: #3b82f6;
+.carddesc {
+  flex: 1;
+  min-width: 0;
 }
 
-.notice[data-variant="warning"] {
-  color: #78350f;
-  background-color: #fffbeb;
-  border-color: #f59e0b;
+.carddesc > :first-child {
+  margin-top: 0;
 }
 
-.notice[data-variant="success"] {
-  color: #14532d;
-  background-color: #f0fdf4;
-  border-color: #22c55e;
+.carddesc > :last-child {
+  margin-bottom: 0;
+}
+
+.cardContainer {
+  container-type: inline-size;
+}
+
+@container (max-width: 480px) {
+  .cardinfo {
+    flex-direction: column;
+  }
+  .carddesc {
+    width: 100%;
+  }
 }
