@@ -1,0 +1,27 @@
+.notice {
+  margin-block: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.notice {
+  border-left: 4px solid;
+}
+
+.notice[data-variant="info"] {
+  color: #1e3a8a;
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.notice[data-variant="warning"] {
+  color: #78350f;
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+}
+
+.notice[data-variant="success"] {
+  color: #14532d;
+  background-color: #f0fdf4;
+  border-color: #22c55e;
+}

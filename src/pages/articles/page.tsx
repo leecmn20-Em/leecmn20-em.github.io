@@ -36,13 +36,27 @@ function ArticlesPage() {
       <h1>Articles</h1>
       <div className={styles.articleGrid}>
         <details>
-          <summary>제어 이야기</summary>
+          <summary>제어 이론 이야기</summary>
           <Article name="PID" />
+          <Article name="FEP" />
+        </details>
+        <details>
+          <summary>몬헌 이야기</summary>
+          <p> Coming Soon </p>
+        </details>
+        <details>
+          <summary>마듀 이야기</summary>
+          <Article name="SS-introduction" />
+          <Article name="SS-basic" />
+        </details>
+        <details>
+          <summary>게임 리뷰</summary>
+          <Article name="Big Walk" />
         </details>
       </div>
     </div>
   );
 }
 
-//export default ArticlesPage;
-export default WIP;
+export default ArticlesPage;
+//export default WIP;
