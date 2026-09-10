@@ -1,5 +1,5 @@
-import styles from "../projectDetail.module.css";
-import Markdown from "react-markdown";
+import styles from "@/pages/projects/projectDetail.module.css";
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import description from "./description.md?raw";
 
 function Title() {
@@ -24,7 +24,7 @@ function Summary() {
 function Description() {
   return (
     <div className={styles.projectDescription}>
-      <Markdown>{description}</Markdown>
+      <MarkdownRenderer>{description}</MarkdownRenderer>
     </div>
   );
 }
