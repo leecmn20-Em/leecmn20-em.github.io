@@ -1,0 +1,41 @@
+.cardinfo {
+  max-width: 800px;
+  border: 0.5px solid black;
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cardinfo > img {
+  width: 180px;
+  max-width: 40%;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.carddesc {
+  flex: 1;
+  min-width: 0;
+}
+
+.carddesc > :first-child {
+  margin-top: 0;
+}
+
+.carddesc > :last-child {
+  margin-bottom: 0;
+}
+
+.cardContainer {
+  container-type: inline-size;
+}
+
+@container (max-width: 480px) {
+  .cardinfo {
+    flex-direction: column;
+  }
+  .carddesc {
+    width: 100%;
+  }
+}
