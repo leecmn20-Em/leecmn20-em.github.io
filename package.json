@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "resources:ygo": "node scripts/download-ygo-images.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

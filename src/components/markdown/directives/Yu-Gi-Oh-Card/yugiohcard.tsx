@@ -2,7 +2,7 @@ import type { DirectiveComponentProps } from "../../directiveTypes";
 import styles from "./yugiohcard.module.css";
 
 const imageModules = import.meta.glob<string>(
-  "@/resources/YuGiOh/*.{jpg,jpeg,png,webp,gif,avif}",
+  "@/resources/YGO/*.{jpg,jpeg,png,webp,gif,avif}",
   {
     eager: true,
     query: "?url",
