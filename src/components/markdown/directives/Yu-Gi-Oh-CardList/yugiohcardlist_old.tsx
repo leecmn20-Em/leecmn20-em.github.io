@@ -1,26 +1,12 @@
-import { Children, isValidElement, type ReactNode } from "react";
 import type { DirectiveComponentProps } from "../../directiveTypes";
 import { getCardImage } from "../Yu-Gi-Oh-Card/cardImages";
 import styles from "./yugiohcardlist.module.css";
 
-function extractText(node: ReactNode): string {
-  if (typeof node === "string" || typeof node === "number") {
-    return String(node);
-  }
-
-  if (isValidElement<{ children?: ReactNode }>(node)) {
-    return extractText(node.props.children);
-  }
-
-  return Children.toArray(node).map(extractText).join("");
-}
-
 function YuGiOhCardList({ attributes, children }: DirectiveComponentProps) {
-  const cardNames = Children.toArray(children)
-    .flatMap((child) => extractText(child).split(/\r?\n/))
+  const cardNames = (attributes.card ?? "")
+    .split("|")
     .map((name) => name.trim())
     .filter(Boolean);
-
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardList}>
@@ -32,17 +18,14 @@ function YuGiOhCardList({ attributes, children }: DirectiveComponentProps) {
               {imageUrl ? (
                 <img src={imageUrl} alt={cardName} loading="lazy" />
               ) : (
-                <div className={styles.missing}>
-                  이미지를 찾을 수 없습니다: {cardName}
-                </div>
-              )}
-              {attributes.caption === "true" && (
-                <figcaption>{cardName}</figcaption>
+                <div className={styles.missing}>이미지를 찾을 수 없습니다</div>
               )}
             </figure>
           );
         })}
       </div>
+
+      {children && <div className={styles.description}>{children}</div>}
     </div>
   );
 }

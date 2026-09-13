@@ -1,41 +1,39 @@
-.cardinfo {
-  max-width: 800px;
-  border: 0.5px solid black;
-  padding: 0.5rem;
-  display: flex;
-  align-items: flex-start;
+.cardContainer {
+  margin-block: 1rem;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, min(40%, 100px));
   gap: 1rem;
 }
 
-.cardinfo > img {
-  width: 180px;
-  max-width: 40%;
-  height: auto;
-  flex-shrink: 0;
-}
-
-.carddesc {
-  flex: 1;
+.card {
   min-width: 0;
+  margin: 0;
 }
 
-.carddesc > :first-child {
-  margin-top: 0;
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.carddesc > :last-child {
-  margin-bottom: 0;
+.card figcaption {
+  margin-top: 0.5rem;
+  font-size: 80%;
+  text-align: center;
 }
 
-.cardContainer {
-  container-type: inline-size;
+.missing {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 59 / 86;
+  padding: 0.5rem;
+  background: #eee;
+  text-align: center;
 }
 
-@container (max-width: 480px) {
-  .cardinfo {
-    flex-direction: column;
-  }
-  .carddesc {
-    width: 100%;
-  }
+.description {
+  margin-top: 1rem;
 }
