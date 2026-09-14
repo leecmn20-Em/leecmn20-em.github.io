@@ -37,17 +37,15 @@ function ArticlesPage() {
       <div className={styles.articleGrid}>
         <details>
           <summary>제어 이론 이야기</summary>
-          <Article name="PID" />
-          <Article name="FEP" />
+          <p> Coming Soon </p>
         </details>
         <details>
-          <summary>몬헌 이야기</summary>
-          <p> Coming Soon </p>
+          <summary>잡다한 이야기</summary>
+          <Article name="Termux-Ubuntu" />
         </details>
         <details>
           <summary>마듀 이야기</summary>
           <Article name="SS-introduction" />
-          <Article name="SS-basic" />
         </details>
         <details>
           <summary>게임 리뷰</summary>

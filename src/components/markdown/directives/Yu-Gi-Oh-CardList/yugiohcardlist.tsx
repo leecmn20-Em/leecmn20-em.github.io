@@ -1,25 +1,10 @@
-import { Children, isValidElement, type ReactNode } from "react";
 import type { DirectiveComponentProps } from "../../directiveTypes";
+import { extractDirectiveLines } from "../../extractDirectiveLines";
 import { getCardImage } from "../Yu-Gi-Oh-Card/cardImages";
 import styles from "./yugiohcardlist.module.css";
 
-function extractText(node: ReactNode): string {
-  if (typeof node === "string" || typeof node === "number") {
-    return String(node);
-  }
-
-  if (isValidElement<{ children?: ReactNode }>(node)) {
-    return extractText(node.props.children);
-  }
-
-  return Children.toArray(node).map(extractText).join("");
-}
-
 function YuGiOhCardList({ attributes, children }: DirectiveComponentProps) {
-  const cardNames = Children.toArray(children)
-    .flatMap((child) => extractText(child).split(/\r?\n/))
-    .map((name) => name.trim())
-    .filter(Boolean);
+  const cardNames = extractDirectiveLines(children);
 
   return (
     <div className={styles.cardContainer}>

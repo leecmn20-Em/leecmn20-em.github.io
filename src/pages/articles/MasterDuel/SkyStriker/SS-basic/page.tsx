@@ -1,12 +1,13 @@
 import main from "./main.md?raw";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import styles from "@/pages/articles/articleDetail.module.css";
+import ReturnBack from "@/components/ReturnBack";
 import WIP from "@/pages/WIP";
 
 function Header() {
   return (
     <header className={styles.articleHeader}>
-      <p>섬도 기초</p>
+      <h1>섬도 기초</h1>
     </header>
   );
 }
@@ -21,10 +22,13 @@ function Main() {
 
 function Page() {
   return (
-    <div className={styles.articlePage}>
-      <Header />
-      <Main />
-    </div>
+    <>
+      <ReturnBack href="../../" />
+      <div className={styles.articlePage}>
+        <Header />
+        <Main />
+      </div>
+    </>
   );
 }
 

@@ -228,3 +228,12 @@ main {
   object-fit: contain;
   flex: none;
 }
+
+.returnback {
+  padding: 1px;
+}
+
+.returnback a {
+  color: grey;
+  text-decoration: none;
+}

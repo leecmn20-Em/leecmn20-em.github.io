@@ -1,0 +1,10 @@
+.cardContainer {
+  margin-block: 1rem;
+}
+
+.cardContainer svg {
+  display: block;
+  width: 100%;
+  max-width: 840px;
+  height: auto;
+}
