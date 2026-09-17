@@ -25,3 +25,7 @@
 :::ygofield
 ex2: 섬도희-시즈쿠
 :::
+
+:::ygohalffield
+ex2: 시호섬도희-아마츠
+:::

@@ -17,6 +17,11 @@ const halfFieldSlots = [
   "cst4",
   "cst5",
   "cf",
+  "cg",
+  "cv",
+  "cd",
+  "ced",
+  "ch",
   "ex1",
   "ex2",
 ] as const satisfies readonly (keyof ComponentProps<typeof YGOHalfField>)[];
@@ -34,21 +39,26 @@ const fieldSlots = [
   "ost4",
   "ost5",
   "of",
+  "og",
+  "ov",
+  "od",
+  "oed",
+  "oh",
 ] as const satisfies readonly (keyof ComponentProps<typeof YGOField>)[];
 
-function isFieldSlot<Slot extends string>(
+function isFieldSlot(
   value: string,
-  slots: readonly Slot[],
-): value is Slot {
+  slots: readonly (keyof ComponentProps<typeof YGOField>)[],
+): value is keyof ComponentProps<typeof YGOField> {
   return slots.some((slot) => slot === value);
 }
 
-function readFieldImages<Slot extends string>(
+function readFieldImages(
   children: ReactNode,
-  slots: readonly Slot[],
+  slots: readonly (keyof ComponentProps<typeof YGOField>)[],
 ) {
-  const images: Partial<Record<Slot, string>> = {};
-  const usedSlots = new Set<Slot>();
+  const images: Partial<ComponentProps<typeof YGOField>> = {};
+  const usedSlots = new Set<keyof ComponentProps<typeof YGOField>>();
 
   for (const line of extractDirectiveLines(children)) {
     const separator = line.indexOf(":");
@@ -60,6 +70,15 @@ function readFieldImages<Slot extends string>(
     const cardName = line.slice(separator + 1).trim();
 
     if (!isFieldSlot(slot, slots)) {
+      continue;
+    }
+    if (slot === "ch" || slot === "oh") {
+      if (cardName) {
+        const imageUrl = getCardImage(cardName);
+        if (imageUrl) {
+          images[slot] = [...(images[slot] ?? []), imageUrl];
+        }
+      }
       continue;
     }
     if (usedSlots.has(slot)) {

@@ -7,6 +7,133 @@ type YGOZoneProps = {
 
 function Zone({ x, y, width, imageSrc }: YGOZoneProps) {
   const height = width * (1185 / 813);
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      {imageSrc ? (
+        <image
+          href={imageSrc}
+          x={-width / 2}
+          y={-height / 2}
+          width={width}
+          height={height}
+        />
+      ) : (
+        <rect
+          x={-width / 2}
+          y={-height / 2}
+          width={width}
+          height={height}
+          fill="none"
+          stroke="black"
+        />
+      )}
+    </g>
+  );
+}
+
+type YGOSignProps = {
+  x: number;
+  y: number;
+  width: number;
+  color?: string;
+};
+
+function GraveyardSign({ x, y, width, color = "currentColor" }: YGOSignProps) {
+  return (
+    <g
+      transform={`translate(${x - width / 2} ${y - width / 2}) scale(${width / 32})`}
+      fill="none"
+      stroke={color}
+      strokeWidth={1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="묘지"
+    >
+      <circle cx={16} cy={16} r={15} />
+      <path d="M 4 25 C 13 25 16 24 16 16 C 16 8 19 7 28 7" />
+    </g>
+  );
+}
+
+function GraveyardZone({ x, y, width, imageSrc }: YGOZoneProps) {
+  const height = width * (1185 / 813);
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      {imageSrc ? (
+        <image
+          href={imageSrc}
+          x={-width / 2}
+          y={-height / 2}
+          width={width}
+          height={height}
+        />
+      ) : (
+        <>
+          <rect
+            x={-width / 2}
+            y={-height / 2}
+            width={width}
+            height={height}
+            fill="none"
+            stroke="black"
+          />
+          <GraveyardSign x={0} y={0} width={width / 2.5} />
+        </>
+      )}
+    </g>
+  );
+}
+
+function VanishZone({ x, y, width, imageSrc }: YGOZoneProps) {
+  const height = width * (1185 / 813);
+  return (
+    <g transform={`translate(${x} ${y}) rotate(90)`}>
+      {imageSrc ? (
+        <image
+          href={imageSrc}
+          x={-width / 2}
+          y={-height / 2}
+          width={width}
+          height={height}
+        />
+      ) : (
+        <>
+          <rect
+            x={-width / 2}
+            y={-height / 2}
+            width={width}
+            height={height}
+            fill="none"
+            stroke="black"
+          />
+          <VanishSign x={0} y={0} width={width / 2.5} />
+        </>
+      )}
+    </g>
+  );
+}
+
+function VanishSign({ x, y, width, color = "currentColor" }: YGOSignProps) {
+  return (
+    <g
+      transform={`translate(${x - width / 2} ${y - width / 2}) scale(${width / 32})`}
+      fill="none"
+      stroke={color}
+      strokeWidth={1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="제외"
+    >
+      <rect x={7} y={3} width={18} height={26} />
+      <path d="M 11 7 L 21 25 M 21 7 L 11 25" />
+    </g>
+  );
+}
+
+function DeckZone({ x, y, width, imageSrc }: YGOZoneProps) {
+  const height = width * (1185 / 813);
   const rectx = x - 0.5 * width;
   const recty = y - 0.5 * height;
   if (imageSrc) {
@@ -44,6 +171,11 @@ type YGOFieldProps = {
   cst4?: string;
   cst5?: string;
   cf?: string;
+  cg?: string;
+  cv?: string;
+  cd?: string;
+  ced?: string;
+  ch?: string[];
   om1?: string;
   om2?: string;
   om3?: string;
@@ -55,6 +187,11 @@ type YGOFieldProps = {
   ost4?: string;
   ost5?: string;
   of?: string;
+  og?: string;
+  ov?: string;
+  od?: string;
+  oed?: string;
+  oh?: string[];
   ex1?: string;
   ex2?: string;
 };
@@ -71,6 +208,10 @@ export function YGOField({
   cst4,
   cst5,
   cf,
+  cg,
+  cv,
+  cd,
+  ced,
   om1,
   om2,
   om3,
@@ -82,16 +223,20 @@ export function YGOField({
   ost4,
   ost5,
   of,
+  og,
+  ov,
+  od,
+  oed,
   ex1,
   ex2,
 }: YGOFieldProps) {
-  const width = 840;
-  const height = 980;
+  const width = 1020;
+  const height = 1190;
   const cardwidth = 100;
-  const x = [60, 180, 300, 420, 540, 660, 780];
-  const y = [130, 310, 490, 670, 850];
+  const x = [60, 210, 360, 510, 660, 810, 960];
+  const y = [235, 415, 595, 775, 955];
   return (
-    <svg viewBox="0 0 840 980">
+    <svg viewBox="0 0 1020 1190">
       <rect
         x={0}
         y={0}
@@ -113,11 +258,19 @@ export function YGOField({
       <Zone x={x[5]} y={y[1]} width={cardwidth} imageSrc={om5} />
 
       <Zone x={x[6]} y={y[1]} width={cardwidth} imageSrc={of} />
+      <GraveyardZone x={x[0]} y={y[1]} width={cardwidth} imageSrc={og} />
+      <VanishZone x={x[0] + 15} y={y[2]} width={cardwidth} imageSrc={ov} />
+      <DeckZone x={x[0]} y={y[0]} width={cardwidth} imageSrc={od} />
+      <DeckZone x={x[6]} y={y[0]} width={cardwidth} imageSrc={oed} />
 
       <Zone x={x[2]} y={y[2]} width={cardwidth} imageSrc={ex1} />
       <Zone x={x[4]} y={y[2]} width={cardwidth} imageSrc={ex2} />
 
       <Zone x={x[0]} y={y[3]} width={cardwidth} imageSrc={cf} />
+      <GraveyardZone x={x[6]} y={y[3]} width={cardwidth} imageSrc={cg} />
+      <VanishZone x={x[6] - 15} y={y[2]} width={cardwidth} imageSrc={cv} />
+      <DeckZone x={x[6]} y={y[4]} width={cardwidth} imageSrc={cd} />
+      <DeckZone x={x[0]} y={y[4]} width={cardwidth} imageSrc={ced} />
 
       <Zone x={x[1]} y={y[3]} width={cardwidth} imageSrc={cm1} />
       <Zone x={x[2]} y={y[3]} width={cardwidth} imageSrc={cm2} />
@@ -146,6 +299,11 @@ type YGOHalfFieldProps = {
   cst4?: string;
   cst5?: string;
   cf?: string;
+  cg?: string;
+  cv?: string;
+  cd?: string;
+  ced?: string;
+  ch?: string[];
   ex1?: string;
   ex2?: string;
 };
@@ -162,16 +320,27 @@ export function YGOHalfField({
   cst4,
   cst5,
   cf,
+  cg,
+  cv,
+  cd,
+  ced,
   ex1,
   ex2,
 }: YGOHalfFieldProps) {
-  const width = 840;
-  const height = 660;
+  const width = 1020;
   const cardwidth = 100;
-  const x = [60, 180, 300, 420, 540, 660, 780];
-  const y = [170, 330, 490];
+  const cardheight = cardwidth * (1185 / 813);
+  const rowSpacing = 180;
+  const x = [60, 210, 360, 510, 660, 810, 960];
+  const y = [
+    rowSpacing - cardheight / 2,
+    2 * rowSpacing - cardheight / 2,
+    3 * rowSpacing - cardheight / 2,
+  ];
+  const fullFieldBottomGap = 1190 - (955 + cardheight / 2);
+  const height = y[2] + cardheight / 2 + fullFieldBottomGap;
   return (
-    <svg viewBox="0 0 840 660">
+    <svg viewBox={`0 0 ${width} ${height}`}>
       <rect
         x={0}
         y={0}
@@ -184,6 +353,10 @@ export function YGOHalfField({
       <Zone x={x[4]} y={y[0]} width={cardwidth} imageSrc={ex2} />
 
       <Zone x={x[0]} y={y[1]} width={cardwidth} imageSrc={cf} />
+      <GraveyardZone x={x[6]} y={y[1]} width={cardwidth} imageSrc={cg} />
+      <VanishZone x={x[6] - 15} y={y[0]} width={cardwidth} imageSrc={cv} />
+      <DeckZone x={x[6]} y={y[2]} width={cardwidth} imageSrc={cd} />
+      <DeckZone x={x[0]} y={y[2]} width={cardwidth} imageSrc={ced} />
 
       <Zone x={x[1]} y={y[1]} width={cardwidth} imageSrc={cm1} />
       <Zone x={x[2]} y={y[1]} width={cardwidth} imageSrc={cm2} />
