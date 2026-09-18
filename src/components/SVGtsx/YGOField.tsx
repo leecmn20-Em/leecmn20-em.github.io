@@ -148,15 +148,80 @@ function DeckZone({ x, y, width, imageSrc }: YGOZoneProps) {
     );
   }
   return (
-    <rect
-      x={rectx}
-      y={recty}
-      width={width}
-      height={height}
-      fill="none"
-      stroke="black"
-    />
+    <>
+      <rect
+        x={rectx}
+        y={recty}
+        width={width}
+        height={height}
+        fill="none"
+        stroke="black"
+      />
+      <ellipse
+        cx={x}
+        cy={y}
+        rx={width / 5}
+        ry={height / 5}
+        fill="none"
+        stroke="black"
+      />
+    </>
   );
+}
+
+type HandProps = {
+  x: number;
+  y: number;
+  width: number;
+  cardWidth: number;
+  images?: string[];
+};
+
+function Hand({ x, y, width, cardWidth, images }: HandProps) {
+  if (!images?.length) {
+    return null;
+  }
+
+  const handCardWidth = Math.min(cardWidth, width / images.length);
+  const handX = Array.from(
+    { length: images.length },
+    (_, index) => x + (index - (images.length - 1) / 2) * handCardWidth,
+  );
+
+  return (
+    <g>
+      {images.map((imageSrc, index) => (
+        <Zone
+          key={index}
+          x={handX[index]}
+          y={y}
+          width={handCardWidth}
+          imageSrc={imageSrc}
+        />
+      ))}
+    </g>
+  );
+}
+
+function getFieldRows(
+  rowCount: number,
+  cardWidth: number,
+  hasTopHand: boolean,
+  hasBottomHand: boolean,
+) {
+  const cardHeight = cardWidth * (1185 / 813);
+  const rowSpacing = 180;
+  const rowGap = rowSpacing - cardHeight;
+  const handGap = (1190 - (cardHeight + 4 * rowSpacing)) / 2;
+  const topGap = hasTopHand ? handGap : rowGap;
+  const bottomGap = hasBottomHand ? handGap : rowGap;
+  const y = Array.from(
+    { length: rowCount },
+    (_, index) => topGap + cardHeight / 2 + index * rowSpacing,
+  );
+  const height = topGap + cardHeight + (rowCount - 1) * rowSpacing + bottomGap;
+
+  return { y, height, topGap, bottomGap };
 }
 
 type YGOFieldProps = {
@@ -212,6 +277,7 @@ export function YGOField({
   cv,
   cd,
   ced,
+  ch,
   om1,
   om2,
   om3,
@@ -227,16 +293,22 @@ export function YGOField({
   ov,
   od,
   oed,
+  oh,
   ex1,
   ex2,
 }: YGOFieldProps) {
   const width = 1020;
-  const height = 1190;
   const cardwidth = 100;
+  const vanishOffset = (cardwidth * (1185 / 813) - cardwidth) / 2;
   const x = [60, 210, 360, 510, 660, 810, 960];
-  const y = [235, 415, 595, 775, 955];
+  const { y, height, topGap, bottomGap } = getFieldRows(
+    5,
+    cardwidth,
+    !!oh?.length,
+    !!ch?.length,
+  );
   return (
-    <svg viewBox="0 0 1020 1190">
+    <svg viewBox={`0 0 ${width} ${height}`}>
       <rect
         x={0}
         y={0}
@@ -259,7 +331,12 @@ export function YGOField({
 
       <Zone x={x[6]} y={y[1]} width={cardwidth} imageSrc={of} />
       <GraveyardZone x={x[0]} y={y[1]} width={cardwidth} imageSrc={og} />
-      <VanishZone x={x[0] + 15} y={y[2]} width={cardwidth} imageSrc={ov} />
+      <VanishZone
+        x={x[0] + vanishOffset}
+        y={y[2] - vanishOffset}
+        width={cardwidth}
+        imageSrc={ov}
+      />
       <DeckZone x={x[0]} y={y[0]} width={cardwidth} imageSrc={od} />
       <DeckZone x={x[6]} y={y[0]} width={cardwidth} imageSrc={oed} />
 
@@ -268,7 +345,12 @@ export function YGOField({
 
       <Zone x={x[0]} y={y[3]} width={cardwidth} imageSrc={cf} />
       <GraveyardZone x={x[6]} y={y[3]} width={cardwidth} imageSrc={cg} />
-      <VanishZone x={x[6] - 15} y={y[2]} width={cardwidth} imageSrc={cv} />
+      <VanishZone
+        x={x[6] - vanishOffset}
+        y={y[2] + vanishOffset}
+        width={cardwidth}
+        imageSrc={cv}
+      />
       <DeckZone x={x[6]} y={y[4]} width={cardwidth} imageSrc={cd} />
       <DeckZone x={x[0]} y={y[4]} width={cardwidth} imageSrc={ced} />
 
@@ -283,6 +365,20 @@ export function YGOField({
       <Zone x={x[3]} y={y[4]} width={cardwidth} imageSrc={cst3} />
       <Zone x={x[4]} y={y[4]} width={cardwidth} imageSrc={cst4} />
       <Zone x={x[5]} y={y[4]} width={cardwidth} imageSrc={cst5} />
+      <Hand
+        x={width / 2}
+        y={topGap / 2}
+        width={width - 20}
+        cardWidth={cardwidth * 0.8}
+        images={oh}
+      />
+      <Hand
+        x={width / 2}
+        y={height - bottomGap / 2}
+        width={width - 20}
+        cardWidth={cardwidth * 0.8}
+        images={ch}
+      />
     </svg>
   );
 }
@@ -324,21 +420,20 @@ export function YGOHalfField({
   cv,
   cd,
   ced,
+  ch,
   ex1,
   ex2,
 }: YGOHalfFieldProps) {
   const width = 1020;
   const cardwidth = 100;
-  const cardheight = cardwidth * (1185 / 813);
-  const rowSpacing = 180;
+  const vanishOffset = (cardwidth * (1185 / 813) - cardwidth) / 2;
   const x = [60, 210, 360, 510, 660, 810, 960];
-  const y = [
-    rowSpacing - cardheight / 2,
-    2 * rowSpacing - cardheight / 2,
-    3 * rowSpacing - cardheight / 2,
-  ];
-  const fullFieldBottomGap = 1190 - (955 + cardheight / 2);
-  const height = y[2] + cardheight / 2 + fullFieldBottomGap;
+  const { y, height, bottomGap } = getFieldRows(
+    3,
+    cardwidth,
+    false,
+    !!ch?.length,
+  );
   return (
     <svg viewBox={`0 0 ${width} ${height}`}>
       <rect
@@ -354,7 +449,12 @@ export function YGOHalfField({
 
       <Zone x={x[0]} y={y[1]} width={cardwidth} imageSrc={cf} />
       <GraveyardZone x={x[6]} y={y[1]} width={cardwidth} imageSrc={cg} />
-      <VanishZone x={x[6] - 15} y={y[0]} width={cardwidth} imageSrc={cv} />
+      <VanishZone
+        x={x[6] - vanishOffset}
+        y={y[0] + vanishOffset}
+        width={cardwidth}
+        imageSrc={cv}
+      />
       <DeckZone x={x[6]} y={y[2]} width={cardwidth} imageSrc={cd} />
       <DeckZone x={x[0]} y={y[2]} width={cardwidth} imageSrc={ced} />
 
@@ -369,6 +469,13 @@ export function YGOHalfField({
       <Zone x={x[3]} y={y[2]} width={cardwidth} imageSrc={cst3} />
       <Zone x={x[4]} y={y[2]} width={cardwidth} imageSrc={cst4} />
       <Zone x={x[5]} y={y[2]} width={cardwidth} imageSrc={cst5} />
+      <Hand
+        x={width / 2}
+        y={height - bottomGap / 2}
+        width={width - 20}
+        cardWidth={cardwidth * 0.8}
+        images={ch}
+      />
     </svg>
   );
 }
