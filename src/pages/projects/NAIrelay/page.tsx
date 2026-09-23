@@ -1,6 +1,7 @@
-import styles from "@/pages/projects/projectDetail.module.css";
+import styles from "@projects/projectDetail.module.css";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import description from "./description.md?raw";
+import ReturnBack from "@/components/ReturnBack";
 
 function Title() {
   return (
@@ -50,12 +51,15 @@ function RepositoryLink() {
 
 function NAIrelayPage() {
   return (
-    <div className={styles.projectPage}>
-      <Title />
-      <Summary />
-      <RepositoryLink />
-      <Description />
-    </div>
+    <>
+      <ReturnBack href="@projects" />
+      <div className={styles.projectPage}>
+        <Title />
+        <Summary />
+        <RepositoryLink />
+        <Description />
+      </div>
+    </>
   );
 }
 

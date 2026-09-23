@@ -10,13 +10,16 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "resources:ygo": "node scripts/download-ygo-images.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0",
     "remark-directive": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "style-to-js": "^2.0.2",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {

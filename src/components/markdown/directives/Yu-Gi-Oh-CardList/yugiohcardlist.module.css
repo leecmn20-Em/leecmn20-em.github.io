@@ -1,0 +1,39 @@
+.cardContainer {
+  margin-block: 1rem;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, min(40%, 100px));
+  gap: 1rem;
+}
+
+.card {
+  min-width: 0;
+  margin: 0;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card figcaption {
+  margin-top: 0.5rem;
+  font-size: 80%;
+  text-align: center;
+}
+
+.missing {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 59 / 86;
+  padding: 0.5rem;
+  background: #eee;
+  text-align: center;
+}
+
+.description {
+  margin-top: 1rem;
+}

@@ -10,7 +10,10 @@ type DirectiveNode = ContainerDirective | LeafDirective | TextDirective;
 
 function markAsDirective(node: DirectiveNode) {
   node.data ??= {};
-  node.data.hName = node.type === "textDirective" ? "span" : "div";
+  node.data.hName =
+    node.type === "textDirective"
+      ? "md-inline-directive"
+      : "md-block-directive";
   node.data.hProperties = {
     dataDirective: node.name,
     dataDirectiveAttributes: JSON.stringify(node.attributes ?? {}),
