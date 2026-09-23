@@ -1,4 +1,4 @@
-.markdown code {
+:where(.markdown) code {
   padding: 0.15em 0.4em;
   margin-inline: 0.08em;
 

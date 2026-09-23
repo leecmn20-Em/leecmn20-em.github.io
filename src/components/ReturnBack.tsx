@@ -1,3 +1,5 @@
+import { resolveURL } from "@/routes";
+
 type ReturnBackProps = {
   href?: string;
   text?: string;
@@ -8,7 +10,7 @@ function ReturnBack({ href, text }: ReturnBackProps) {
   text ??= "돌아가기";
   return (
     <div className="returnback">
-      <a href={href} rel="noopener noreferrer">
+      <a href={resolveURL(href)} rel="noopener noreferrer">
         ← {text}
       </a>
     </div>

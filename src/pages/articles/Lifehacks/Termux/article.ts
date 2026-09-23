@@ -1,4 +1,4 @@
-import type { ArticleInfo } from "@/pages/articles/articleTypes";
+import type { ArticleInfo } from "@articles/articleTypes";
 
 export const articleInfo: ArticleInfo = {
   name: "Termux-Ubuntu",

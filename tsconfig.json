@@ -12,7 +12,9 @@
     "skipLibCheck": true,
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@articles/*": ["./src/pages/articles/*"],
+      "@projects/*": ["./src/pages/projects/*"]
     }
   },
   "include": ["src"]

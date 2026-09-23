@@ -3,7 +3,11 @@ import type { DirectiveComponentProps } from "../../directiveTypes";
 import { extractDirectiveLines } from "../../extractDirectiveLines";
 import { getCardImage } from "../Yu-Gi-Oh-Card/cardImages";
 import styles from "./yugiohfield.module.css";
-import { YGOField, YGOHalfField } from "@/components/SVGtsx/YGOField";
+import {
+  YGOCardPlacement,
+  YGOField,
+  YGOHalfField,
+} from "@/components/SVGtsx/YGOField";
 
 const halfFieldSlots = [
   "cm1",
@@ -66,8 +70,14 @@ function readFieldImages(
       continue;
     }
 
-    const slot = line.slice(0, separator).trim();
+    const rawSlot = line.slice(0, separator).trim();
     const cardName = line.slice(separator + 1).trim();
+
+    const [slot, ...rawStates] = rawSlot
+      .split(",")
+      .map((value) => value.trim().toLowerCase());
+
+    const states = new Set(rawStates);
 
     if (!isFieldSlot(slot, slots)) {
       continue;
@@ -92,11 +102,23 @@ function readFieldImages(
 
     const imageUrl = getCardImage(cardName);
     if (imageUrl) {
-      images[slot] = imageUrl;
+      images[slot] = createCardPlacement(imageUrl, states);
     }
   }
 
   return images;
+}
+
+function createCardPlacement(
+  imageSrc: string,
+  states: ReadonlySet<string>,
+): YGOCardPlacement {
+  return {
+    imageSrc,
+    defense: states.has("d"),
+    faceDown: states.has("b"),
+    extraopponent: states.has("o"),
+  };
 }
 
 export function YuGiOhField({ children }: DirectiveComponentProps) {

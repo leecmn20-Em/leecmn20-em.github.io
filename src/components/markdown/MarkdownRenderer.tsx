@@ -1,5 +1,6 @@
 import Markdown from "react-markdown";
 import remarkDirective from "remark-directive";
+import remarkGFM from "remark-gfm";
 import { BlockDirective, InlineDirective } from "./MarkdownDirectiveComponents";
 import remarkCustomDirectives from "./markdownDirectives";
 import styles from "./markdown.module.css";
@@ -12,10 +13,10 @@ function MarkdownRenderer({ children }: MarkdownRendererProps) {
   return (
     <div className={styles.markdown}>
       <Markdown
-        remarkPlugins={[remarkDirective, remarkCustomDirectives]}
+        remarkPlugins={[remarkGFM, remarkDirective, remarkCustomDirectives]}
         components={{
-          div: BlockDirective,
-          span: InlineDirective,
+          "md-block-directive": BlockDirective,
+          "md-inline-directive": InlineDirective,
         }}
       >
         {children}

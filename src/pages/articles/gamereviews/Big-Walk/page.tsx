@@ -1,6 +1,6 @@
 import main from "./main.md?raw";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
-import styles from "@/pages/articles/articleDetail.module.css";
+import styles from "@articles/articleDetail.module.css";
 import discordicon from "@/resources/Discord/Discord-Symbol-Blurple.svg";
 import ReturnBack from "@/components/ReturnBack";
 import WIP from "@/pages/WIP";
@@ -33,7 +33,7 @@ function Main() {
 function Page() {
   return (
     <>
-      <ReturnBack href="../../" />
+      <ReturnBack href="@articles" />
       <div className={styles.articlePage}>
         <Header />
         <Main />

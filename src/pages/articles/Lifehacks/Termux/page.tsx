@@ -1,6 +1,6 @@
 import main from "./main.md?raw";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
-import styles from "../../articleDetail.module.css";
+import styles from "@articles/articleDetail.module.css";
 import ReturnBack from "@/components/ReturnBack";
 import WIP from "@/pages/WIP";
 
@@ -35,7 +35,7 @@ function Main() {
 function Page() {
   return (
     <>
-      <ReturnBack href="../../" />
+      <ReturnBack href="@articles" />
       <div className={styles.articlePage}>
         <Header />
         <Introduction />

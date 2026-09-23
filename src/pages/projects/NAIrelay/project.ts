@@ -1,4 +1,4 @@
-import type { ProjectInfo } from "@/pages/projects/projectTypes";
+import type { ProjectInfo } from "@projects/projectTypes";
 import thumbnail from "./thumbnail.png";
 
 export const projectInfo: ProjectInfo = {

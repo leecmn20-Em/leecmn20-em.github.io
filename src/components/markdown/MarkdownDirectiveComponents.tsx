@@ -6,8 +6,10 @@ import {
   inlineDirectiveComponents,
 } from "./directiveRegistry";
 
-type BlockRendererProps = ComponentPropsWithoutRef<"div"> & ExtraProps;
-type InlineRendererProps = ComponentPropsWithoutRef<"span"> & ExtraProps;
+type BlockRendererProps = ComponentPropsWithoutRef<"md-block-directive"> &
+  ExtraProps;
+type InlineRendererProps = ComponentPropsWithoutRef<"md-inline-directive"> &
+  ExtraProps;
 
 function readDirective(node: ExtraProps["node"]) {
   const name = node?.properties?.dataDirective;

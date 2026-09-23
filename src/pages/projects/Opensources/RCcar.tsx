@@ -1,4 +1,4 @@
-import styles from "../projectDetail.module.css";
+import styles from "@projects/projectDetail.module.css";
 
 function Title() {
   return (

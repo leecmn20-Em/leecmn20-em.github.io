@@ -1,35 +1,11 @@
-type YGOZoneProps = {
-  x: number;
-  y: number;
-  width: number;
-  imageSrc?: string;
-};
+import type { ReactNode } from "react";
 
-function Zone({ x, y, width, imageSrc }: YGOZoneProps) {
-  const height = width * (1185 / 813);
-  return (
-    <g transform={`translate(${x} ${y})`}>
-      {imageSrc ? (
-        <image
-          href={imageSrc}
-          x={-width / 2}
-          y={-height / 2}
-          width={width}
-          height={height}
-        />
-      ) : (
-        <rect
-          x={-width / 2}
-          y={-height / 2}
-          width={width}
-          height={height}
-          fill="none"
-          stroke="black"
-        />
-      )}
-    </g>
-  );
-}
+export type YGOCardPlacement = {
+  imageSrc: string;
+  defense?: boolean;
+  faceDown?: boolean;
+  extraopponent?: boolean;
+};
 
 type YGOSignProps = {
   x: number;
@@ -56,64 +32,6 @@ function GraveyardSign({ x, y, width, color = "currentColor" }: YGOSignProps) {
   );
 }
 
-function GraveyardZone({ x, y, width, imageSrc }: YGOZoneProps) {
-  const height = width * (1185 / 813);
-  return (
-    <g transform={`translate(${x} ${y})`}>
-      {imageSrc ? (
-        <image
-          href={imageSrc}
-          x={-width / 2}
-          y={-height / 2}
-          width={width}
-          height={height}
-        />
-      ) : (
-        <>
-          <rect
-            x={-width / 2}
-            y={-height / 2}
-            width={width}
-            height={height}
-            fill="none"
-            stroke="black"
-          />
-          <GraveyardSign x={0} y={0} width={width / 2.5} />
-        </>
-      )}
-    </g>
-  );
-}
-
-function VanishZone({ x, y, width, imageSrc }: YGOZoneProps) {
-  const height = width * (1185 / 813);
-  return (
-    <g transform={`translate(${x} ${y}) rotate(90)`}>
-      {imageSrc ? (
-        <image
-          href={imageSrc}
-          x={-width / 2}
-          y={-height / 2}
-          width={width}
-          height={height}
-        />
-      ) : (
-        <>
-          <rect
-            x={-width / 2}
-            y={-height / 2}
-            width={width}
-            height={height}
-            fill="none"
-            stroke="black"
-          />
-          <VanishSign x={0} y={0} width={width / 2.5} />
-        </>
-      )}
-    </g>
-  );
-}
-
 function VanishSign({ x, y, width, color = "currentColor" }: YGOSignProps) {
   return (
     <g
@@ -132,40 +50,126 @@ function VanishSign({ x, y, width, color = "currentColor" }: YGOSignProps) {
   );
 }
 
-function DeckZone({ x, y, width, imageSrc }: YGOZoneProps) {
+type YGOZoneProps = {
+  x: number;
+  y: number;
+  width: number;
+  card?: YGOCardPlacement;
+  imageSrc?: string;
+  zoneRotation?: number;
+  cardRotation?: number;
+  children?: ReactNode;
+};
+
+function CardZone({
+  x,
+  y,
+  width,
+  card,
+  imageSrc,
+  zoneRotation = 0,
+  cardRotation = 0,
+  children,
+}: YGOZoneProps) {
   const height = width * (1185 / 813);
-  const rectx = x - 0.5 * width;
-  const recty = y - 0.5 * height;
-  if (imageSrc) {
-    return (
-      <image
-        href={imageSrc}
-        x={rectx}
-        y={recty}
-        width={width}
-        height={height}
-      />
-    );
-  }
   return (
-    <>
-      <rect
-        x={rectx}
-        y={recty}
-        width={width}
-        height={height}
-        fill="none"
-        stroke="black"
-      />
-      <ellipse
-        cx={x}
-        cy={y}
-        rx={width / 5}
-        ry={height / 5}
-        fill="none"
-        stroke="black"
-      />
-    </>
+    <g transform={`translate(${x} ${y})`}>
+      <g transform={`rotate(${zoneRotation})`}>
+        <g transform={`rotate(${cardRotation})`}>
+          {(card?.imageSrc ?? imageSrc) ? (
+            <image
+              href={card?.imageSrc ?? imageSrc}
+              x={-width / 2}
+              y={-height / 2}
+              width={width}
+              height={height}
+            />
+          ) : (
+            <rect
+              x={-width / 2}
+              y={-height / 2}
+              width={width}
+              height={height}
+              fill="none"
+              stroke="black"
+            />
+          )}
+        </g>
+        {children}
+      </g>
+    </g>
+  );
+}
+
+function Zone(props: YGOZoneProps) {
+  return <CardZone {...props} />;
+}
+
+function getMonsterCardRotation(
+  card: YGOCardPlacement | undefined,
+  baseRotation = 0,
+) {
+  return (
+    baseRotation + (card?.extraopponent ? 180 : 0) + (card?.defense ? -90 : 0)
+  );
+}
+
+function MonsterZone({ card, ...props }: YGOZoneProps) {
+  return (
+    <Zone
+      {...props}
+      card={card}
+      cardRotation={getMonsterCardRotation(card, props.cardRotation)}
+    />
+  );
+}
+
+function SpellTrapZone(props: YGOZoneProps) {
+  return <Zone {...props} />;
+}
+
+function ExtraZone({ card, ...props }: YGOZoneProps) {
+  return (
+    <Zone
+      {...props}
+      card={card}
+      cardRotation={getMonsterCardRotation(card, props.cardRotation)}
+    />
+  );
+}
+
+function GraveyardZone({ card, ...props }: YGOZoneProps) {
+  return (
+    <CardZone card={card} {...props}>
+      {!card && <GraveyardSign x={0} y={0} width={props.width / 2.5} />}
+    </CardZone>
+  );
+}
+
+function VanishZone({ card, ...props }: YGOZoneProps) {
+  return (
+    <CardZone card={card} zoneRotation={90} {...props}>
+      {!card && <VanishSign x={0} y={0} width={props.width / 2.5} />}
+    </CardZone>
+  );
+}
+
+function DeckZone({ card, ...props }: YGOZoneProps) {
+  const width = props.width;
+  const height = width * (1185 / 813);
+  return (
+    <CardZone card={card} {...props}>
+      {!card && (
+        <ellipse
+          cx={0}
+          cy={0}
+          rx={width / 5}
+          ry={height / 5}
+          fill="none"
+          stroke="black"
+        />
+      )}
+    </CardZone>
   );
 }
 
@@ -175,9 +179,10 @@ type HandProps = {
   width: number;
   cardWidth: number;
   images?: string[];
+  cardRotation?: number;
 };
 
-function Hand({ x, y, width, cardWidth, images }: HandProps) {
+function Hand({ x, y, width, cardWidth, images, cardRotation = 0 }: HandProps) {
   if (!images?.length) {
     return null;
   }
@@ -197,6 +202,7 @@ function Hand({ x, y, width, cardWidth, images }: HandProps) {
           y={y}
           width={handCardWidth}
           imageSrc={imageSrc}
+          cardRotation={cardRotation}
         />
       ))}
     </g>
@@ -225,40 +231,40 @@ function getFieldRows(
 }
 
 type YGOFieldProps = {
-  cm1?: string;
-  cm2?: string;
-  cm3?: string;
-  cm4?: string;
-  cm5?: string;
-  cst1?: string;
-  cst2?: string;
-  cst3?: string;
-  cst4?: string;
-  cst5?: string;
-  cf?: string;
-  cg?: string;
-  cv?: string;
-  cd?: string;
-  ced?: string;
+  cm1?: YGOCardPlacement;
+  cm2?: YGOCardPlacement;
+  cm3?: YGOCardPlacement;
+  cm4?: YGOCardPlacement;
+  cm5?: YGOCardPlacement;
+  cst1?: YGOCardPlacement;
+  cst2?: YGOCardPlacement;
+  cst3?: YGOCardPlacement;
+  cst4?: YGOCardPlacement;
+  cst5?: YGOCardPlacement;
+  cf?: YGOCardPlacement;
+  cg?: YGOCardPlacement;
+  cv?: YGOCardPlacement;
+  cd?: YGOCardPlacement;
+  ced?: YGOCardPlacement;
   ch?: string[];
-  om1?: string;
-  om2?: string;
-  om3?: string;
-  om4?: string;
-  om5?: string;
-  ost1?: string;
-  ost2?: string;
-  ost3?: string;
-  ost4?: string;
-  ost5?: string;
-  of?: string;
-  og?: string;
-  ov?: string;
-  od?: string;
-  oed?: string;
+  om1?: YGOCardPlacement;
+  om2?: YGOCardPlacement;
+  om3?: YGOCardPlacement;
+  om4?: YGOCardPlacement;
+  om5?: YGOCardPlacement;
+  ost1?: YGOCardPlacement;
+  ost2?: YGOCardPlacement;
+  ost3?: YGOCardPlacement;
+  ost4?: YGOCardPlacement;
+  ost5?: YGOCardPlacement;
+  of?: YGOCardPlacement;
+  og?: YGOCardPlacement;
+  ov?: YGOCardPlacement;
+  od?: YGOCardPlacement;
+  oed?: YGOCardPlacement;
   oh?: string[];
-  ex1?: string;
-  ex2?: string;
+  ex1?: YGOCardPlacement;
+  ex2?: YGOCardPlacement;
 };
 
 export function YGOField({
@@ -299,6 +305,7 @@ export function YGOField({
 }: YGOFieldProps) {
   const width = 1020;
   const cardwidth = 100;
+  const opponentCardRotation = 180;
   const vanishOffset = (cardwidth * (1185 / 813) - cardwidth) / 2;
   const x = [60, 210, 360, 510, 660, 810, 960];
   const { y, height, topGap, bottomGap } = getFieldRows(
@@ -317,61 +324,149 @@ export function YGOField({
         fill="lightgrey"
         stroke="black"
       />
-      <Zone x={x[1]} y={y[0]} width={cardwidth} imageSrc={ost1} />
-      <Zone x={x[2]} y={y[0]} width={cardwidth} imageSrc={ost2} />
-      <Zone x={x[3]} y={y[0]} width={cardwidth} imageSrc={ost3} />
-      <Zone x={x[4]} y={y[0]} width={cardwidth} imageSrc={ost4} />
-      <Zone x={x[5]} y={y[0]} width={cardwidth} imageSrc={ost5} />
+      <SpellTrapZone
+        x={x[1]}
+        y={y[0]}
+        width={cardwidth}
+        card={ost1}
+        cardRotation={opponentCardRotation}
+      />
+      <SpellTrapZone
+        x={x[2]}
+        y={y[0]}
+        width={cardwidth}
+        card={ost2}
+        cardRotation={opponentCardRotation}
+      />
+      <SpellTrapZone
+        x={x[3]}
+        y={y[0]}
+        width={cardwidth}
+        card={ost3}
+        cardRotation={opponentCardRotation}
+      />
+      <SpellTrapZone
+        x={x[4]}
+        y={y[0]}
+        width={cardwidth}
+        card={ost4}
+        cardRotation={opponentCardRotation}
+      />
+      <SpellTrapZone
+        x={x[5]}
+        y={y[0]}
+        width={cardwidth}
+        card={ost5}
+        cardRotation={opponentCardRotation}
+      />
 
-      <Zone x={x[1]} y={y[1]} width={cardwidth} imageSrc={om1} />
-      <Zone x={x[2]} y={y[1]} width={cardwidth} imageSrc={om2} />
-      <Zone x={x[3]} y={y[1]} width={cardwidth} imageSrc={om3} />
-      <Zone x={x[4]} y={y[1]} width={cardwidth} imageSrc={om4} />
-      <Zone x={x[5]} y={y[1]} width={cardwidth} imageSrc={om5} />
+      <MonsterZone
+        x={x[1]}
+        y={y[1]}
+        width={cardwidth}
+        card={om1}
+        cardRotation={opponentCardRotation}
+      />
+      <MonsterZone
+        x={x[2]}
+        y={y[1]}
+        width={cardwidth}
+        card={om2}
+        cardRotation={opponentCardRotation}
+      />
+      <MonsterZone
+        x={x[3]}
+        y={y[1]}
+        width={cardwidth}
+        card={om3}
+        cardRotation={opponentCardRotation}
+      />
+      <MonsterZone
+        x={x[4]}
+        y={y[1]}
+        width={cardwidth}
+        card={om4}
+        cardRotation={opponentCardRotation}
+      />
+      <MonsterZone
+        x={x[5]}
+        y={y[1]}
+        width={cardwidth}
+        card={om5}
+        cardRotation={opponentCardRotation}
+      />
 
-      <Zone x={x[6]} y={y[1]} width={cardwidth} imageSrc={of} />
-      <GraveyardZone x={x[0]} y={y[1]} width={cardwidth} imageSrc={og} />
+      <Zone
+        x={x[6]}
+        y={y[1]}
+        width={cardwidth}
+        card={of}
+        cardRotation={opponentCardRotation}
+      />
+      <GraveyardZone
+        x={x[0]}
+        y={y[1]}
+        width={cardwidth}
+        card={og}
+        cardRotation={opponentCardRotation}
+      />
       <VanishZone
         x={x[0] + vanishOffset}
         y={y[2] - vanishOffset}
         width={cardwidth}
-        imageSrc={ov}
+        card={ov}
+        cardRotation={opponentCardRotation}
       />
-      <DeckZone x={x[0]} y={y[0]} width={cardwidth} imageSrc={od} />
-      <DeckZone x={x[6]} y={y[0]} width={cardwidth} imageSrc={oed} />
+      <DeckZone
+        x={x[0]}
+        y={y[0]}
+        width={cardwidth}
+        card={od}
+        cardRotation={opponentCardRotation}
+      />
+      <DeckZone
+        x={x[6]}
+        y={y[0]}
+        width={cardwidth}
+        card={oed}
+        cardRotation={opponentCardRotation}
+      />
 
-      <Zone x={x[2]} y={y[2]} width={cardwidth} imageSrc={ex1} />
-      <Zone x={x[4]} y={y[2]} width={cardwidth} imageSrc={ex2} />
+      <ExtraZone x={x[2]} y={y[2]} width={cardwidth} card={ex1} />
+      <ExtraZone x={x[4]} y={y[2]} width={cardwidth} card={ex2} />
 
-      <Zone x={x[0]} y={y[3]} width={cardwidth} imageSrc={cf} />
-      <GraveyardZone x={x[6]} y={y[3]} width={cardwidth} imageSrc={cg} />
+      <Zone x={x[0]} y={y[3]} width={cardwidth} card={cf} />
+      <GraveyardZone x={x[6]} y={y[3]} width={cardwidth} card={cg} />
       <VanishZone
         x={x[6] - vanishOffset}
         y={y[2] + vanishOffset}
         width={cardwidth}
-        imageSrc={cv}
+        card={cv}
       />
-      <DeckZone x={x[6]} y={y[4]} width={cardwidth} imageSrc={cd} />
-      <DeckZone x={x[0]} y={y[4]} width={cardwidth} imageSrc={ced} />
+      <DeckZone x={x[6]} y={y[4]} width={cardwidth} card={cd} />
+      <DeckZone x={x[0]} y={y[4]} width={cardwidth} card={ced} />
 
-      <Zone x={x[1]} y={y[3]} width={cardwidth} imageSrc={cm1} />
-      <Zone x={x[2]} y={y[3]} width={cardwidth} imageSrc={cm2} />
-      <Zone x={x[3]} y={y[3]} width={cardwidth} imageSrc={cm3} />
-      <Zone x={x[4]} y={y[3]} width={cardwidth} imageSrc={cm4} />
-      <Zone x={x[5]} y={y[3]} width={cardwidth} imageSrc={cm5} />
+      <MonsterZone x={x[1]} y={y[3]} width={cardwidth} card={cm1} />
+      <MonsterZone x={x[2]} y={y[3]} width={cardwidth} card={cm2} />
+      <MonsterZone x={x[3]} y={y[3]} width={cardwidth} card={cm3} />
+      <MonsterZone x={x[4]} y={y[3]} width={cardwidth} card={cm4} />
+      <MonsterZone x={x[5]} y={y[3]} width={cardwidth} card={cm5} />
 
-      <Zone x={x[1]} y={y[4]} width={cardwidth} imageSrc={cst1} />
-      <Zone x={x[2]} y={y[4]} width={cardwidth} imageSrc={cst2} />
-      <Zone x={x[3]} y={y[4]} width={cardwidth} imageSrc={cst3} />
-      <Zone x={x[4]} y={y[4]} width={cardwidth} imageSrc={cst4} />
-      <Zone x={x[5]} y={y[4]} width={cardwidth} imageSrc={cst5} />
+      <SpellTrapZone x={x[1]} y={y[4]} width={cardwidth} card={cst1} />
+      <SpellTrapZone x={x[2]} y={y[4]} width={cardwidth} card={cst2} />
+      <SpellTrapZone x={x[3]} y={y[4]} width={cardwidth} card={cst3} />
+      <SpellTrapZone x={x[4]} y={y[4]} width={cardwidth} card={cst4} />
+      <SpellTrapZone x={x[5]} y={y[4]} width={cardwidth} card={cst5} />
+
       <Hand
         x={width / 2}
         y={topGap / 2}
         width={width - 20}
         cardWidth={cardwidth * 0.8}
         images={oh}
+        cardRotation={opponentCardRotation}
       />
+
       <Hand
         x={width / 2}
         y={height - bottomGap / 2}
@@ -384,24 +479,24 @@ export function YGOField({
 }
 
 type YGOHalfFieldProps = {
-  cm1?: string;
-  cm2?: string;
-  cm3?: string;
-  cm4?: string;
-  cm5?: string;
-  cst1?: string;
-  cst2?: string;
-  cst3?: string;
-  cst4?: string;
-  cst5?: string;
-  cf?: string;
-  cg?: string;
-  cv?: string;
-  cd?: string;
-  ced?: string;
+  cm1?: YGOCardPlacement;
+  cm2?: YGOCardPlacement;
+  cm3?: YGOCardPlacement;
+  cm4?: YGOCardPlacement;
+  cm5?: YGOCardPlacement;
+  cst1?: YGOCardPlacement;
+  cst2?: YGOCardPlacement;
+  cst3?: YGOCardPlacement;
+  cst4?: YGOCardPlacement;
+  cst5?: YGOCardPlacement;
+  cf?: YGOCardPlacement;
+  cg?: YGOCardPlacement;
+  cv?: YGOCardPlacement;
+  cd?: YGOCardPlacement;
+  ced?: YGOCardPlacement;
   ch?: string[];
-  ex1?: string;
-  ex2?: string;
+  ex1?: YGOCardPlacement;
+  ex2?: YGOCardPlacement;
 };
 
 export function YGOHalfField({
@@ -444,31 +539,31 @@ export function YGOHalfField({
         fill="lightgrey"
         stroke="black"
       />
-      <Zone x={x[2]} y={y[0]} width={cardwidth} imageSrc={ex1} />
-      <Zone x={x[4]} y={y[0]} width={cardwidth} imageSrc={ex2} />
+      <ExtraZone x={x[2]} y={y[0]} width={cardwidth} card={ex1} />
+      <ExtraZone x={x[4]} y={y[0]} width={cardwidth} card={ex2} />
 
-      <Zone x={x[0]} y={y[1]} width={cardwidth} imageSrc={cf} />
-      <GraveyardZone x={x[6]} y={y[1]} width={cardwidth} imageSrc={cg} />
+      <Zone x={x[0]} y={y[1]} width={cardwidth} card={cf} />
+      <GraveyardZone x={x[6]} y={y[1]} width={cardwidth} card={cg} />
       <VanishZone
         x={x[6] - vanishOffset}
         y={y[0] + vanishOffset}
         width={cardwidth}
-        imageSrc={cv}
+        card={cv}
       />
-      <DeckZone x={x[6]} y={y[2]} width={cardwidth} imageSrc={cd} />
-      <DeckZone x={x[0]} y={y[2]} width={cardwidth} imageSrc={ced} />
+      <DeckZone x={x[6]} y={y[2]} width={cardwidth} card={cd} />
+      <DeckZone x={x[0]} y={y[2]} width={cardwidth} card={ced} />
 
-      <Zone x={x[1]} y={y[1]} width={cardwidth} imageSrc={cm1} />
-      <Zone x={x[2]} y={y[1]} width={cardwidth} imageSrc={cm2} />
-      <Zone x={x[3]} y={y[1]} width={cardwidth} imageSrc={cm3} />
-      <Zone x={x[4]} y={y[1]} width={cardwidth} imageSrc={cm4} />
-      <Zone x={x[5]} y={y[1]} width={cardwidth} imageSrc={cm5} />
+      <MonsterZone x={x[1]} y={y[1]} width={cardwidth} card={cm1} />
+      <MonsterZone x={x[2]} y={y[1]} width={cardwidth} card={cm2} />
+      <MonsterZone x={x[3]} y={y[1]} width={cardwidth} card={cm3} />
+      <MonsterZone x={x[4]} y={y[1]} width={cardwidth} card={cm4} />
+      <MonsterZone x={x[5]} y={y[1]} width={cardwidth} card={cm5} />
 
-      <Zone x={x[1]} y={y[2]} width={cardwidth} imageSrc={cst1} />
-      <Zone x={x[2]} y={y[2]} width={cardwidth} imageSrc={cst2} />
-      <Zone x={x[3]} y={y[2]} width={cardwidth} imageSrc={cst3} />
-      <Zone x={x[4]} y={y[2]} width={cardwidth} imageSrc={cst4} />
-      <Zone x={x[5]} y={y[2]} width={cardwidth} imageSrc={cst5} />
+      <SpellTrapZone x={x[1]} y={y[2]} width={cardwidth} card={cst1} />
+      <SpellTrapZone x={x[2]} y={y[2]} width={cardwidth} card={cst2} />
+      <SpellTrapZone x={x[3]} y={y[2]} width={cardwidth} card={cst3} />
+      <SpellTrapZone x={x[4]} y={y[2]} width={cardwidth} card={cst4} />
+      <SpellTrapZone x={x[5]} y={y[2]} width={cardwidth} card={cst5} />
       <Hand
         x={width / 2}
         y={height - bottomGap / 2}
