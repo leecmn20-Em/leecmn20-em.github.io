@@ -35,22 +35,22 @@ function ArticlesPage() {
     <div className={styles.article}>
       <h1>Articles</h1>
       <div className={styles.articleGrid}>
-        <details>
+        {/* <details>
           <summary>제어 이론 이야기</summary>
           <p> Coming Soon </p>
-        </details>
+        </details> */}
         <details>
-          <summary>잡다한 이야기</summary>
+          <summary>알아두면 (쓸 사람만 좋은) 팁</summary>
           <Article name="Termux-Ubuntu" />
         </details>
         <details>
           <summary>마듀 이야기</summary>
           <Article name="SS-introduction" />
         </details>
-        <details>
+        {/* <details>
           <summary>게임 리뷰</summary>
           <Article name="Big Walk" />
-        </details>
+        </details> */}
       </div>
     </div>
   );
