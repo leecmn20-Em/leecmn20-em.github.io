@@ -14,7 +14,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@articles/*": ["./src/pages/articles/*"],
-      "@projects/*": ["./src/pages/projects/*"]
+      "@projects/*": ["./src/pages/projects/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@ui": ["./src/components/ui/index.ts"]
     }
   },
   "include": ["src"]

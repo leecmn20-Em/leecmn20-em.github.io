@@ -2,7 +2,7 @@ import main from "./main.md?raw";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import styles from "@articles/articleDetail.module.css";
 import discordicon from "@/resources/Discord/Discord-Symbol-Blurple.svg";
-import ReturnBack from "@/components/ReturnBack";
+import { ReturnBack } from "@ui";
 import WIP from "@/pages/WIP";
 
 function Header() {

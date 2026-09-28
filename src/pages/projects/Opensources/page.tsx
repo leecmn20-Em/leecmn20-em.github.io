@@ -1,7 +1,7 @@
 import styles from "@projects/projectDetail.module.css";
 import Title1 from "./sikcook-code";
 import Title2 from "./RCcar";
-import ReturnBack from "@/components/ReturnBack";
+import { ReturnBack } from "@ui";
 
 function OpensourcesPage() {
   return (

@@ -1,0 +1,63 @@
+:root {
+  /* Text */
+  --color-text: #222;
+  --color-text-heading: #1e293b;
+  --color-text-secondary: #334155;
+  --color-text-muted: #475569;
+  --color-text-subtle: #64748b;
+  --color-text-link: blue;
+  --color-text-link-detail: #0070f3;
+  --color-text-link-muted: grey;
+
+  /* Backgrounds */
+  --color-background: #fff;
+  --color-background-topbar: #f8fafc;
+  --color-background-muted: #f1f3f5;
+  --color-background-code: lightgrey;
+  --color-background-placeholder: #eee;
+  --color-background-icon: skyblue;
+
+  /* Buttons and other interactive surfaces */
+  --color-button: #e3ebe6;
+  --color-button-hover: #e2e6ea;
+  --color-button-hover-accent: #d3e0d8;
+
+  /* Borders, focus indicators, and separators */
+  --color-border: #d7dce2;
+  --color-border-content: #ddd;
+  --color-border-muted: grey;
+  --color-border-card: #ccc;
+  --color-border-strong: black;
+  --color-border-focus: #2563eb;
+  --color-border-hover: purple;
+  --color-border-icon: yellowgreen;
+
+  /* Status and progress */
+  --color-text-status: #3f6851;
+  --color-background-status: #5f8d73;
+  --color-background-status-halo: rgb(95 141 115 / 14%);
+  --color-background-progress: #86a995;
+  --color-background-progress-highlight: #d3e0d8;
+
+  /* Notice variants */
+  --color-text-notice-info: #1e3a8a;
+  --color-background-notice-info: #eff6ff;
+  --color-border-notice-info: #3b82f6;
+  --color-text-notice-warning: #78350f;
+  --color-background-notice-warning: #fffbeb;
+  --color-border-notice-warning: #f59e0b;
+  --color-text-notice-success: #14532d;
+  --color-background-notice-success: #f0fdf4;
+  --color-border-notice-success: #22c55e;
+
+  /* Shadows and overlays */
+  --color-shadow: rgb(0 0 0 / 10%);
+  --color-shadow-strong: rgb(0 0 0 / 15%);
+  --color-shadow-soft: rgb(15 23 42 / 8%);
+  --color-overlay: rgb(0 0 0 / 35%);
+
+  /* SVG artwork */
+  --color-stroke: black;
+  --color-fill-muted: lightgrey;
+  --color-text-icon: darkgreen;
+}

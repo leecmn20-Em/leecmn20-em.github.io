@@ -1,7 +1,7 @@
 import styles from "@projects/projectDetail.module.css";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import description from "./description.md?raw";
-import ReturnBack from "@/components/ReturnBack";
+import { ReturnBack } from "@ui";
 
 function Title() {
   return (
