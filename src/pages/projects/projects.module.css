@@ -11,7 +11,7 @@
 }
 
 .projectCard {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   padding: 1rem;
   border-radius: 8px;
   transition: box-shadow 0.3s ease;
@@ -27,7 +27,7 @@
 }
 
 .projectCard a:hover {
-  border-color: purple;
+  border-color: var(--color-purple-500);
 }
 
 .projectCard img {
@@ -46,13 +46,13 @@
   min-height: 180px;
   padding: 1.5rem;
   border-radius: 8px;
-  background-color: #f1f3f5;
-  color: #334155;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
   font-size: 1.25rem;
   font-weight: 600;
   text-align: center;
 }
 
 .projectCard:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--color-shadow-soft);
 }

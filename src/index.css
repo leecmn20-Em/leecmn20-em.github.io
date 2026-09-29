@@ -3,13 +3,8 @@
 
 :root {
   font-family: system-ui, sans-serif;
-  color: #222;
-  background: #fff;
-
-  --topbar-bg: #f8fafc;
-  --sidebar-bg: #f1f3f5;
-  --content-bg: #ffffff;
-  --divider-color: #d7dce2;
+  color: var(--color-text);
+  background: var(--color-background);
 }
 
 * {
@@ -50,7 +45,7 @@ main {
   top: 0;
   z-index: 20;
 
-  background-color: var(--topbar-bg);
+  background-color: var(--color-surface-subtle);
 }
 
 .topbar-ICON {
@@ -73,16 +68,16 @@ main {
   height: 44px;
   padding: 0;
 
-  color: #222;
+  color: var(--color-text);
   font-size: 1.25rem;
   background: transparent;
-  border: 1px solid var(--divider-color);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
 }
 
 .menu-button:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
@@ -97,8 +92,8 @@ main {
   overflow-y: auto;
   z-index: 10;
 
-  background-color: var(--sidebar-bg);
-  border-right: 1px solid var(--divider-color);
+  background-color: var(--color-surface-muted);
+  border-right: 1px solid var(--color-border);
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -124,25 +119,25 @@ main {
   min-width: 0;
   padding: 8px 12px;
 
-  color: #222;
+  color: var(--color-action-soft-text);
   text-decoration: none;
   border-radius: 6px;
-  background-color: #e3ebe6;
+  background-color: var(--color-action-soft);
 }
 
 .sidebar-link:hover {
-  background-color: #e2e6ea;
+  background-color: var(--color-action-soft-hover);
 }
 
 .sidebar-link:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-focus);
   outline-offset: -2px;
 }
 
 .site-content {
   grid-area: content;
   min-width: 0;
-  background-color: var(--content-bg);
+  background-color: var(--color-surface);
 }
 
 @media (max-width: 768px) {
@@ -183,7 +178,7 @@ main {
       visibility 180ms ease;
 
     z-index: 30;
-    box-shadow: 8px 0 24px rgb(0 0 0 / 15%);
+    box-shadow: 8px 0 24px var(--color-shadow-strong);
   }
 
   .sidebar[data-open="true"] {
@@ -199,7 +194,7 @@ main {
 
     visibility: hidden;
     opacity: 0;
-    background: rgb(0 0 0 / 35%);
+    background: var(--color-overlay);
     border: 0;
     pointer-events: none;
     transition:
@@ -237,6 +232,6 @@ main {
 }
 
 .returnback a {
-  color: grey;
+  color: var(--color-neutral-800);
   text-decoration: none;
 }

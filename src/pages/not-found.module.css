@@ -4,7 +4,7 @@
 
 .code {
   margin: 0 0 16px;
-  color: #64748b;
+  color: var(--color-text-subtle);
   font-size: clamp(48px, 10vw, 88px);
   font-weight: 800;
   line-height: 1;
@@ -18,7 +18,7 @@
 
 .description {
   margin-bottom: 32px;
-  color: #475569;
+  color: var(--color-text-muted);
   line-height: 1.8;
   word-break: keep-all;
   overflow-wrap: anywhere;
@@ -30,17 +30,17 @@
   min-height: 44px;
   padding: 12px 20px;
   border-radius: 6px;
-  background-color: #e3ebe6;
-  color: #222;
+  background-color: var(--color-action-soft);
+  color: var(--color-action-soft-text);
   font-weight: 600;
   text-decoration: none;
 }
 
 .homeLink:hover {
-  background-color: #d3e0d8;
+  background-color: var(--color-action-soft-hover);
 }
 
 .homeLink:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-focus);
   outline-offset: 4px;
 }

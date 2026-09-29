@@ -8,7 +8,7 @@
 .articleLink a {
   font-size: 1rem;
   padding: 1rem 1.25rem;
-  color: blue;
+  color: var(--color-link);
 }
 
 .articleLink + .articleLink {
@@ -24,7 +24,7 @@
   min-height: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.75rem;
-  border: 1px solid black;
+  border: 1px solid var(--color-border-strong);
 }
 
 .articleGrid details > summary {

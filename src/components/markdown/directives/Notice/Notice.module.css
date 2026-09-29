@@ -9,19 +9,19 @@
 }
 
 .notice[data-variant="info"] {
-  color: #1e3a8a;
-  background-color: #eff6ff;
-  border-color: #3b82f6;
+  color: var(--color-info-text);
+  background-color: var(--color-info-background);
+  border-color: var(--color-info-border);
 }
 
 .notice[data-variant="warning"] {
-  color: #78350f;
-  background-color: #fffbeb;
-  border-color: #f59e0b;
+  color: var(--color-warning-text);
+  background-color: var(--color-warning-background);
+  border-color: var(--color-warning-border);
 }
 
 .notice[data-variant="success"] {
-  color: #14532d;
-  background-color: #f0fdf4;
-  border-color: #22c55e;
+  color: var(--color-success-text);
+  background-color: var(--color-success-background);
+  border-color: var(--color-success-border);
 }

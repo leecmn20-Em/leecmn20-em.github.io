@@ -1,63 +1,104 @@
+/*
+# 팔레트 사용 원칙
+
+- 일반 컴포넌트와 본문·제목 등의 글자는 `--color-{role}` 시맨틱 토큰을 우선 사용한다.
+  어떤 요소에 어떤 역할을 배치할지는 각 페이지와 컴포넌트의 CSS에서 정한다.
+- 사이드바·카드처럼 특정 프로젝트에 종속되지는 않지만 보편적인 디자인 요소는
+  적절한 시맨틱 토큰을 빌리거나 `--color-{family}-{step}` 원시 색을 직접 사용한다.
+  이런 요소의 색을 페이지 CSS에 하드코딩하지 않는다.
+- 명확한 시각적 레퍼런스가 있거나 한 페이지의 콘텐츠에만 속하는 고유 컴포넌트는
+  색을 해당 컴포넌트 CSS에 직접 적는다. 이를 위해 팔레트 토큰을 만들지 않는다.
+
+## 구성과 테마 변경
+
+- 첫 번째 `:root`는 원시 색이다. 계열과 명도 단계로 색 자체를 찾는다.
+- 두 번째 `:root`는 시맨틱 역할이다. 다른 테마는 이 역할만 다시 매핑하면 된다.
+- Tailwind v4로 옮길 때 원시 색은 `@theme`, 테마에 따라 바뀌는 역할은
+  `@theme inline { --color-page: var(--color-background); }`처럼 노출할 수 있다.
+*/
 :root {
-  /* Text */
-  --color-text: #222;
-  --color-text-heading: #1e293b;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-text-subtle: #64748b;
-  --color-text-link: blue;
-  --color-text-link-detail: #0070f3;
-  --color-text-link-muted: grey;
+  /* 원시 색: 다른 테마에서도 재료로 사용할 수 있는 색상 계열 */
+  --color-white: #fff;
+  --color-black: #000;
 
-  /* Backgrounds */
-  --color-background: #fff;
-  --color-background-topbar: #f8fafc;
-  --color-background-muted: #f1f3f5;
-  --color-background-code: lightgrey;
-  --color-background-placeholder: #eee;
-  --color-background-icon: skyblue;
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f3f5;
+  --color-neutral-300: #e2e6ea;
+  --color-neutral-400: #ddd;
+  --color-neutral-500: #d7dce2;
+  --color-neutral-600: #d3d3d3;
+  --color-neutral-700: #ccc;
+  --color-neutral-800: #808080;
+  --color-neutral-900: #222;
 
-  /* Buttons and other interactive surfaces */
-  --color-button: #e3ebe6;
-  --color-button-hover: #e2e6ea;
-  --color-button-hover-accent: #d3e0d8;
+  --color-slate-600: #64748b;
+  --color-slate-700: #475569;
+  --color-slate-800: #334155;
+  --color-slate-900: #1e293b;
 
-  /* Borders, focus indicators, and separators */
-  --color-border: #d7dce2;
-  --color-border-content: #ddd;
-  --color-border-muted: grey;
-  --color-border-card: #ccc;
-  --color-border-strong: black;
-  --color-border-focus: #2563eb;
-  --color-border-hover: purple;
-  --color-border-icon: yellowgreen;
+  --color-sage-100: #e3ebe6;
+  --color-sage-300: #d3e0d8;
 
-  /* Status and progress */
-  --color-text-status: #3f6851;
-  --color-background-status: #5f8d73;
-  --color-background-status-halo: rgb(95 141 115 / 14%);
-  --color-background-progress: #86a995;
-  --color-background-progress-highlight: #d3e0d8;
+  --color-blue-50: #eff6ff;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #0070f3;
+  --color-blue-800: #0000ff;
+  --color-blue-900: #1e3a8a;
 
-  /* Notice variants */
-  --color-text-notice-info: #1e3a8a;
-  --color-background-notice-info: #eff6ff;
-  --color-border-notice-info: #3b82f6;
-  --color-text-notice-warning: #78350f;
-  --color-background-notice-warning: #fffbeb;
-  --color-border-notice-warning: #f59e0b;
-  --color-text-notice-success: #14532d;
-  --color-background-notice-success: #f0fdf4;
-  --color-border-notice-success: #22c55e;
+  --color-amber-50: #fffbeb;
+  --color-amber-500: #f59e0b;
+  --color-amber-900: #78350f;
 
-  /* Shadows and overlays */
-  --color-shadow: rgb(0 0 0 / 10%);
+  --color-green-50: #f0fdf4;
+  --color-green-500: #22c55e;
+  --color-green-900: #14532d;
+
+  --color-purple-500: #800080;
+}
+
+:root {
+  /* 시맨틱 역할: 테마를 바꿀 때 이 블록의 매핑을 교체한다. */
+  /* Page surfaces: canvas, ordinary surface, quiet surface, inset surface. */
+  --color-background: var(--color-white);
+  --color-surface: var(--color-white);
+  --color-surface-subtle: var(--color-neutral-50);
+  --color-surface-muted: var(--color-neutral-100);
+  --color-surface-inset: var(--color-neutral-600);
+
+  /* Text and links: emphasis decreases from strong to subtle. */
+  --color-text: var(--color-neutral-900);
+  --color-text-strong: var(--color-black);
+  --color-text-heading: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-800);
+  --color-text-muted: var(--color-slate-700);
+  --color-text-subtle: var(--color-slate-600);
+  --color-link: var(--color-blue-800);
+
+  /* Interactive surfaces and keyboard focus. */
+  --color-action-soft: var(--color-sage-100);
+  --color-action-soft-hover: var(--color-neutral-300);
+  --color-action-soft-text: var(--color-neutral-900);
+  --color-focus: var(--color-blue-600);
+
+  /* Edges, separators, and modal backdrop. */
+  --color-border: var(--color-neutral-500);
+  --color-divider: var(--color-neutral-400);
+  --color-border-strong: var(--color-black);
+  --color-shadow-soft: rgb(0 0 0 / 10%);
   --color-shadow-strong: rgb(0 0 0 / 15%);
-  --color-shadow-soft: rgb(15 23 42 / 8%);
   --color-overlay: rgb(0 0 0 / 35%);
 
-  /* SVG artwork */
-  --color-stroke: black;
-  --color-fill-muted: lightgrey;
-  --color-text-icon: darkgreen;
+  /* Feedback colors: text, soft background, and accent edge. */
+  --color-info-text: var(--color-blue-900);
+  --color-info-background: var(--color-blue-50);
+  --color-info-border: var(--color-blue-500);
+
+  --color-warning-text: var(--color-amber-900);
+  --color-warning-background: var(--color-amber-50);
+  --color-warning-border: var(--color-amber-500);
+
+  --color-success-text: var(--color-green-900);
+  --color-success-background: var(--color-green-50);
+  --color-success-border: var(--color-green-500);
 }

@@ -3,7 +3,7 @@
 }
 
 .projectPage > * + * {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--color-divider);
   margin-top: 1.5rem;
   padding-top: 1.5rem;
 }
@@ -27,7 +27,7 @@
 
 .projectDescription {
   font-size: 1rem;
-  color: black;
+  color: var(--color-text);
 }
 
 .projectLink {
@@ -38,6 +38,6 @@
 
 .projectLink a {
   text-decoration: none;
-  color: #0070f3;
+  color: var(--color-link);
   transition: color 0.3s ease;
 }
