@@ -1,0 +1,44 @@
+/*
+# 간격 사용 원칙
+
+- 페이지 여백, 섹션 사이 간격, 콘텐츠와 컨트롤의 안쪽 여백처럼 여러 곳에서
+  같은 역할을 하는 간격은 `--spacing-{role}` 시맨틱 토큰을 사용한다.
+  어떤 요소에 적용할지는 각 페이지와 컴포넌트의 CSS에서 정한다.
+- 여러 곳에서 반복되는 크기는 `--spacing-compact`, `--spacing-default`,
+  `--spacing-wide`처럼 크기를 설명하는 원시 토큰을 사용한다. 드물게 쓰는
+  간격만 사용 위치에서 가까운 원시 값을 조정한다.
+- 명확한 시각적 레퍼런스가 있거나 한 콘텐츠에만 속하는 고유한 배치는
+  해당 CSS에서 직접 정한다. 이를 위해 공통 간격 토큰을 늘리지 않는다.
+
+## 구성과 반응형 변경
+
+- 첫 번째 `:root`는 자주 쓰는 간격 크기다. 각 크기는 독립적으로 바꿀 수 있다.
+- 두 번째 `:root`는 용도별 간격이다. 원시 값과 역할의 연결을 바꾸면
+  같은 용도로 쓰는 요소의 간격을 함께 조정할 수 있다.
+- 반응형 조정은 해당 역할을 `@media`에서 다시 정의한다.
+*/
+:root {
+  /* Common spacing sizes, kept independent for theme adjustments. */
+  --spacing-compact: 0.5rem;
+  --spacing-default: 1rem;
+  --spacing-comfortable: 1.25rem;
+  --spacing-wide: 1.5rem;
+  --spacing-roomy: 2rem;
+}
+
+:root {
+  /* Reusable layout roles. */
+  --spacing-page-block: calc(var(--spacing-default) * 3);
+  --spacing-page-inline: var(--spacing-wide);
+  --spacing-section: var(--spacing-wide);
+  --spacing-content-padding: var(--spacing-default);
+  --spacing-control-block: var(--spacing-compact);
+  --spacing-control-inline: calc(var(--spacing-default) * 0.75);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-page-block: var(--spacing-roomy);
+    --spacing-page-inline: var(--spacing-default);
+  }
+}

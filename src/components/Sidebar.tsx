@@ -6,7 +6,7 @@ type SidebarProps = {
 
 function Sidebar({ open }: SidebarProps) {
   return (
-    <aside id="site-sidebar" className="sidebar" data-open={open}>
+    <aside id="site-sidebar" className="sidebar sagepaper" data-open={open}>
       <nav aria-label="주요 메뉴">
         <ul className="sidebar-list">
           {sideNavItems.map((item) => (

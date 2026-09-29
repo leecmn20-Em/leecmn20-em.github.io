@@ -1,24 +1,52 @@
 @layer theme, base, components, utilities;
 @import "./styles/palette.css" layer(theme);
+@import "./styles/typography.css" layer(theme);
+@import "./styles/spacing.css" layer(theme);
 
-:root {
-  font-family: system-ui, sans-serif;
-  color: var(--color-text);
-  background: var(--color-background);
-}
+@layer base {
+  :root {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-background);
+    line-height: var(--text-body-line-height);
+  }
 
-* {
-  box-sizing: border-box;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-body {
-  margin: 0;
-}
+  body {
+    margin: 0;
+  }
 
-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 48px 24px;
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .site-content > * {
+    max-width: 960px;
+    margin-inline: auto;
+    padding: var(--spacing-page-block) var(--spacing-page-inline);
+  }
 }
 
 .site-layout {
@@ -38,14 +66,12 @@ main {
   grid-area: topbar;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 24px;
+  gap: calc(var(--spacing-default) * 0.75);
+  padding: 0 var(--spacing-page-inline);
 
   position: sticky;
   top: 0;
   z-index: 20;
-
-  background-color: var(--color-surface-subtle);
 }
 
 .topbar-ICON {
@@ -69,21 +95,16 @@ main {
   padding: 0;
 
   color: var(--color-text);
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   background: transparent;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
 }
 
-.menu-button:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
 .sidebar {
   grid-area: sidebar;
-  padding: 24px 16px;
+  padding: var(--spacing-wide) var(--spacing-content-padding);
 
   position: sticky;
   top: var(--topbar-height);
@@ -92,7 +113,6 @@ main {
   overflow-y: auto;
   z-index: 10;
 
-  background-color: var(--color-surface-muted);
   border-right: 1px solid var(--color-border);
 
   scrollbar-width: none;
@@ -105,7 +125,7 @@ main {
 .sidebar-list {
   display: grid;
   grid-auto-rows: minmax(44px, auto);
-  gap: 4px;
+  gap: calc(var(--spacing-default) * 0.25);
 
   margin: 0;
   padding: 0;
@@ -117,7 +137,7 @@ main {
   align-items: center;
   width: 100%;
   min-width: 0;
-  padding: 8px 12px;
+  padding: var(--spacing-control-block) var(--spacing-control-inline);
 
   color: var(--color-action-soft-text);
   text-decoration: none;
@@ -130,21 +150,15 @@ main {
 }
 
 .sidebar-link:focus-visible {
-  outline: 2px solid var(--color-focus);
   outline-offset: -2px;
 }
 
 .site-content {
   grid-area: content;
   min-width: 0;
-  background-color: var(--color-surface);
 }
 
 @media (max-width: 768px) {
-  main {
-    padding: 32px 16px;
-  }
-
   .site-layout {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -153,7 +167,6 @@ main {
   }
 
   .topbar {
-    padding-inline: 16px;
     z-index: 40;
   }
 

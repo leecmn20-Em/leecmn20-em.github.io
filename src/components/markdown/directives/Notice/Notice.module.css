@@ -1,6 +1,6 @@
 .notice {
-  margin-block: 1rem;
-  padding: 1rem 1.25rem;
+  margin-block: var(--spacing-default);
+  padding: var(--spacing-content-padding) var(--spacing-comfortable);
   border-radius: 0.5rem;
 }
 

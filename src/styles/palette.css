@@ -15,6 +15,14 @@
 - 두 번째 `:root`는 시맨틱 역할이다. 다른 테마는 이 역할만 다시 매핑하면 된다.
 - Tailwind v4로 옮길 때 원시 색은 `@theme`, 테마에 따라 바뀌는 역할은
   `@theme inline { --color-page: var(--color-background); }`처럼 노출할 수 있다.
+
+## 재사용 표면 텍스처
+
+- 두 `:root` 뒤의 표면 클래스는 색·빛·그림자를 함께 쓰는 시각적 재료다.
+  페이지와 컴포넌트의 배치 규칙은 각자의 CSS에 두고, 표면이 필요한 요소에
+  `whitepaper`, `creampaper`, `greenpaper`, `sagepaper` 클래스를 추가한다.
+- 표면 이름은 적용 위치가 아니라 재질과 색조를 설명한다. 테마를 바꿀 때는
+  시맨틱 색과 해당 표면 클래스의 그라데이션을 함께 조정한다.
 */
 :root {
   /* 원시 색: 다른 테마에서도 재료로 사용할 수 있는 색상 계열 */
@@ -55,6 +63,9 @@
   --color-green-900: #14532d;
 
   --color-purple-500: #800080;
+
+  --color-grassgreen: #7edd61;
+  --color-beige: rgb(245, 239, 220);
 }
 
 :root {
@@ -62,7 +73,7 @@
   /* Page surfaces: canvas, ordinary surface, quiet surface, inset surface. */
   --color-background: var(--color-white);
   --color-surface: var(--color-white);
-  --color-surface-subtle: var(--color-neutral-50);
+  --color-surface-subtle: var(--color-beige);
   --color-surface-muted: var(--color-neutral-100);
   --color-surface-inset: var(--color-neutral-600);
 
@@ -101,4 +112,52 @@
   --color-success-text: var(--color-green-900);
   --color-success-background: var(--color-green-50);
   --color-success-border: var(--color-green-500);
+}
+
+.whitepaper {
+  background-color: #f8f7f2;
+  background-image:
+    radial-gradient(
+      ellipse at 18% 22%,
+      rgb(255 255 255 / 45%),
+      transparent 55%
+    ),
+    radial-gradient(ellipse at 82% 76%, rgb(170 160 135 / 5%), transparent 60%),
+    linear-gradient(135deg, rgb(255 255 255 / 24%), transparent 48%),
+    linear-gradient(#faf9f5, #f4f2eb);
+  box-shadow:
+    0 2px 8px rgb(55 50 38 / 9%),
+    inset 0 0 22px rgb(130 120 95 / 4%);
+}
+
+.creampaper {
+  background-color: var(--color-surface-subtle);
+  background-image:
+    radial-gradient(ellipse at 25% 15%, rgb(255 255 255 / 48%), transparent 65%),
+    linear-gradient(180deg, rgb(255 255 255 / 18%), rgb(165 143 99 / 7%));
+  box-shadow:
+    0 2px 8px rgb(55 50 38 / 7%),
+    inset 0 -1px rgb(100 82 45 / 12%);
+}
+
+.greenpaper {
+  background-color: var(--color-sage-300);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgb(255 255 255 / 22%), transparent 58%),
+    radial-gradient(ellipse at 88% 72%, rgb(126 221 97 / 4%), transparent 62%),
+    linear-gradient(180deg, rgb(255 255 255 / 7%), rgb(72 120 82 / 4%));
+  box-shadow:
+    0 2px 8px rgb(44 80 49 / 12%),
+    inset 0 -1px rgb(46 89 53 / 16%);
+}
+
+.sagepaper {
+  background-color: var(--color-surface-muted);
+  background-image:
+    radial-gradient(ellipse at 18% 8%, rgb(255 255 255 / 65%), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgb(120 150 128 / 9%), transparent 60%),
+    linear-gradient(145deg, rgb(255 255 255 / 16%), rgb(190 205 195 / 10%));
+  box-shadow:
+    inset -1px 0 rgb(70 90 80 / 10%),
+    inset 0 0 22px rgb(70 90 80 / 3%);
 }

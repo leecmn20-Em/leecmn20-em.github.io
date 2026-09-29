@@ -1,18 +1,18 @@
 .project {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: var(--spacing-content-padding);
+  margin-bottom: var(--spacing-default);
 }
 
 .projectGrid {
   display: grid;
   grid-template-columns: minmax(0, 700px);
   justify-content: center;
-  gap: 26px;
+  gap: var(--spacing-section);
 }
 
 .projectCard {
   border: 1px solid var(--color-border);
-  padding: 1rem;
+  padding: var(--spacing-content-padding);
   border-radius: 8px;
   transition: box-shadow 0.3s ease;
 }
@@ -44,12 +44,12 @@
   display: grid;
   place-items: center;
   min-height: 180px;
-  padding: 1.5rem;
+  padding: var(--spacing-wide);
   border-radius: 8px;
   background-color: var(--color-surface-muted);
   color: var(--color-text-secondary);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: var(--text-xl);
+  font-weight: var(--text-emphasis-weight);
   text-align: center;
 }
 

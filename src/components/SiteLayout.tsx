@@ -39,7 +39,7 @@ function SiteLayout({ children }: SiteLayoutProps) {
         tabIndex={sidebarOpen ? 0 : -1}
         onClick={() => setSidebarOpen(false)}
       />
-      <div className="site-content">{children}</div>
+      <div className="site-content whitepaper">{children}</div>
     </div>
   );
 }

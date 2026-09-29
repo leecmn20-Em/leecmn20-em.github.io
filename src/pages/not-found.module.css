@@ -3,10 +3,10 @@
 }
 
 .code {
-  margin: 0 0 16px;
+  margin: 0 0 var(--spacing-default);
   color: var(--color-text-subtle);
   font-size: clamp(48px, 10vw, 88px);
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   line-height: 1;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .description {
-  margin-bottom: 32px;
+  margin-bottom: var(--spacing-roomy);
   color: var(--color-text-muted);
   line-height: 1.8;
   word-break: keep-all;
@@ -28,11 +28,11 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 12px 20px;
+  padding: calc(var(--spacing-default) * 0.75) var(--spacing-comfortable);
   border-radius: 6px;
   background-color: var(--color-action-soft);
   color: var(--color-action-soft-text);
-  font-weight: 600;
+  font-weight: var(--text-emphasis-weight);
   text-decoration: none;
 }
 

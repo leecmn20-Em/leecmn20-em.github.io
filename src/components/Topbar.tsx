@@ -23,7 +23,7 @@ function ICON() {
 
 function Topbar({ sidebarOpen, onMenuClick }: TopbarProps) {
   return (
-    <header className="topbar">
+    <header className="topbar greenpaper">
       <ICON />
       <button
         type="button"

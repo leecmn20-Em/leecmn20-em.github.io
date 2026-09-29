@@ -1,35 +1,35 @@
 .article {
-  padding: 1rem;
+  padding: var(--spacing-content-padding);
 }
 
 .articleLink {
 }
 
 .articleLink a {
-  font-size: 1rem;
-  padding: 1rem 1.25rem;
+  font-size: var(--text-body-size);
+  padding: var(--spacing-content-padding) var(--spacing-comfortable);
   color: var(--color-link);
 }
 
 .articleLink + .articleLink {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-compact);
 }
 
 .articleGrid {
   display: grid;
-  gap: 1.5rem;
+  gap: var(--spacing-section);
 }
 
 .articleGrid details {
   min-height: 1rem;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-control-block) var(--spacing-content-padding);
   border-radius: 0.75rem;
   border: 1px solid var(--color-border-strong);
 }
 
 .articleGrid details > summary {
-  padding: 0.5rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: var(--spacing-control-block) 0;
+  font-size: var(--text-xl);
+  font-weight: var(--text-emphasis-weight);
   cursor: pointer;
 }
