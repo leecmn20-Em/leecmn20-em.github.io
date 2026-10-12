@@ -37,7 +37,7 @@ function RepositoryLink() {
       <p>
         다운로드:
         <a
-          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-1.1.1/NAIrelay-1.1.1.zip"
+          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-2.0.0/NAIrelay-2.0.0.zip"
           rel="noopener noreferrer"
         >
           {" "}
