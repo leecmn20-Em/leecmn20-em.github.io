@@ -41,7 +41,7 @@ function RepositoryLink() {
           rel="noopener noreferrer"
         >
           {" "}
-          NAIrelay v1.1.1 Release
+          NAIrelay v2.0.0 Release
         </a>
       </p>
       <p>현재 빌드된 앱이 아닌 실행 가능한 소스 코드임을 양해해주세요.</p>
