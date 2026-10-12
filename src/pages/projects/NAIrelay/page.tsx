@@ -37,11 +37,11 @@ function RepositoryLink() {
       <p>
         다운로드:
         <a
-          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-2.0.0/NAIrelay-2.0.0.zip"
+          href="https://github.com/leecmn20-Em/Public-Releases/releases/download/nairelay-2.1.0/NAIrelay-2.1.0.zip"
           rel="noopener noreferrer"
         >
           {" "}
-          NAIrelay v2.0.0 Release
+          NAIrelay v2.1.0 Release
         </a>
       </p>
       <p>현재 빌드된 앱이 아닌 실행 가능한 소스 코드임을 양해해주세요.</p>
